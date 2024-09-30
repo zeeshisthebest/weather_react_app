@@ -17,7 +17,7 @@ class WeatherDecription extends Component {
                 <div className="w-4/12 flex flex-col justify-center gap-2">
                     <div className="flex flex-nowrap justify-between text-sm">
                         <p className="text-slate-500">Recently Searched</p>
-                        <a href="#" className="text-gray-300 hover:text-blue-300">
+                        <a href="/" className="text-gray-300 hover:text-blue-300">
                             See all &nbsp;
                             <FontAwesomeIcon
                                 icon={faGreaterThan}

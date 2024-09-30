@@ -26,7 +26,7 @@ const Wrapper = ({ data }) => {
                         color: "#ccc",
                         // curve: "natural",
                         showMark: ({ index }) => index === currentDay,
-                        disableHighlight: false,
+                        disableHighlight: true,
                     },
                 ]}
                 // width={''}
