@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faDroplet,
     faLocationDot,
-    faSearch,
+    // faSearch,
     faEye,
     faTemperatureLow,
 } from "@fortawesome/free-solid-svg-icons";

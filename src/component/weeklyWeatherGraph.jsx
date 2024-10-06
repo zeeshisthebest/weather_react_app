@@ -1,7 +1,8 @@
 import { ChartsReferenceLine, LineChart, lineElementClasses, markElementClasses, } from "@mui/x-charts";
+import PropTypes from "prop-types";
 import React from "react";
 
-const Wrapper = ({ data }) => {
+const WeeklyWeatherGraph = ({ data }) => {
     const currentDay = 4;
     const weeklyWeather = [28, 20, 28, 20, 29, 20, 28];
     const low = Math.min(...weeklyWeather);
@@ -29,13 +30,12 @@ const Wrapper = ({ data }) => {
                         disableHighlight: true,
                     },
                 ]}
-                // width={''}
                 leftAxis={null}
                 bottomAxis={null}
                 margin={{ top: 5, bottom: 5, right: 5, left: 5 }}
-
                 height={110}
                 tooltip={{ trigger: 'none' }}
+
                 sx={{
                     [`& .${lineElementClasses.root}`]: {
                         stroke: '#ccc',
@@ -56,14 +56,17 @@ const Wrapper = ({ data }) => {
                     </radialGradient>
                 </defs>
                 <ChartsReferenceLine
-                    x="4"
+                    x={currentDay}
                     label=""
                     lineStyle={{ stroke: 'darkgray', strokeDasharray: 7 }}
                 />
             </LineChart>
-
         </div>
     );
 };
 
-export default Wrapper;
+WeeklyWeatherGraph.propTypes = {
+    data: PropTypes.array.isRequired
+}
+
+export default WeeklyWeatherGraph;

@@ -1,64 +1,42 @@
-import { Gauge, gaugeClasses, GaugeReferenceArc, GaugeValueArc, useGaugeState } from '@mui/x-charts';
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import React from "react";
+import GaugeChart from "react-gauge-chart";
 
-class UvIndex extends Component {
-    state = {}
-    // GaugePointer = function () {
-    //     const { valueAngle, outerRadius, cx, cy } = useGaugeState();
+// Options for the desing of GaugeChart
+const guageOptions = {
+    id: "gauge-chart2",
+    cornerRadius: 4,
+    nrOfLevels: 30,
+    arcPadding: 0.045,
+    arcWidth: 0.15,
+    needleScale: 0.6,
+    colors: ["#00ff00", "#FF0000"],
+    needleBaseColor: "#999",
+    needleColor: "#BBB",
+    textComponent: (
+        <p className="text-white font-normal absolute top-16 left-32 text-lg">
+            5.5<sup className="text-xs font-semibold">uv</sup>
+        </p>
+    ),
+};
 
-    //     if (valueAngle === null) {
-    //         // No value to display
-    //         return null;
-    //     }
 
-    //     const target = {
-    //         x: cx + outerRadius * Math.sin(valueAngle),
-    //         y: cy - outerRadius * Math.cos(valueAngle),
-    //     };
-    //     return (
-    //         <g>
-    //             <circle cx={cx} cy={cy} r={2} fill="white" />
-    //             <path
-    //                 d={`M ${cx} ${cy} L ${target.x} ${target.y}`}
-    //                 stroke="white"
-    //                 strokeWidth={1}
-    //             />
-    //         </g>
-    //     );
-    // }
-    render () {
-        return (
-            <div className='h-32 w-full'>
-                <Gauge
-                    startAngle={-110}
-                    endAngle={110}
-                    value={20}
-                    text={'4/12'}
-                    cornerRadius={'50%'}
-                    innerRadius={'85%'}
-                    sx={(theme) => ({
-                        [`& .${gaugeClasses.valueText}`]: {
-                            fontSize: 30, color: '#fff !important'
-                        },
-                        [`& .${gaugeClasses.valueArc}`]: {
-                            fill: '#52b202', color: '#fff'
-                        },
-                        [`& .${gaugeClasses.referenceArc}`]: {
-                            fill: theme.palette.text.disabled,
-                            color: '#fff'
-                        },
-                    })}
-                    margin={{ top: 10, bottom: 0 }}
-
-                >
-                    <GaugeReferenceArc />
-                    <GaugeValueArc />
-                    {/* <this.GaugePointer /> */}
-                </Gauge>
-                <p className='text-gray-300 font-semibold text-center top-2'>UV index</p>
+const UvIndex = ({ uvIndex }) => {
+    const uvPercentage = uvIndex / 15;
+    return (
+        <div className="w-full my-3">
+            <GaugeChart {...guageOptions} percent={uvPercentage} />
+            <div className="mx-8 text-slate-300 text-base text-center flex justify-between">
+                <span>0</span>
+                <span>UV Index</span>
+                <span>12</span>
             </div>
-        );
-    }
+        </div>
+    );
+};
+
+UvIndex.propTypes = {
+    uvIndex: PropTypes.number.isRequired
 }
 
 export default UvIndex;

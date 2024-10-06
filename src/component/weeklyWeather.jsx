@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Wrapper from "./wrapper";
+import WeeklyWeatherGraph from "./weeklyWeatherGraph";
 
 class WeeklyWeather extends Component {
     state = {};
@@ -17,7 +17,7 @@ class WeeklyWeather extends Component {
                 <div className="w-full text-center text-lg col-span-1 font-semibold ">Thursday</div>
                 <div className="w-full text-center text-lg col-span-1 font-semibold ">Friday</div>
                 <div className="w-full h-full col-span-7 row-span-2 overflow-visible">
-                    <Wrapper data={data} />
+                    <WeeklyWeatherGraph data={data} />
                 </div>
                 <div className="w-full text-center col-span-1 font-bold text-3xl self-end">28&deg;</div>
                 <div className="w-full text-center col-span-1 font-bold text-3xl self-end">27&deg;</div>
