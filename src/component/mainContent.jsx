@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Location from "./location";
+import LocationAndInfo from "./locationAndInfo";
 import Temprature from "./temperature";
 import WeatherDecription from "./weatherDesc";
 import WeeklyWeather from "./weeklyWeather";
@@ -10,8 +10,8 @@ class MainContent extends Component {
     render () {
         return (
             <div className="col-span-4 grid grid-rows-6 w-full h-full">
-                <Location />
-                <Temprature />
+                <LocationAndInfo location="Brooklyn, New York, USA" isCelcius={false} visibility={13} feelsLike={23} humidity={80} />
+                <Temprature temperature={30} />
                 <WeatherDecription />
                 <WeeklyWeather />
             </div>
