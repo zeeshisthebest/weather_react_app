@@ -19,7 +19,6 @@ const HiLow = ({ hiTemp, lowTemp }) => {
 HiLow.propTypes = {
     hiTemp: PropTypes.number.isRequired,
     lowTemp: PropTypes.number.isRequired,
-}
-
+};
 
 export default HiLow;

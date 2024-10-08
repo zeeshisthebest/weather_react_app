@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
+import OtherLocationCard from "./otherLocationCard";
 
 class WeatherDecription extends Component {
     state = {};
@@ -26,54 +27,9 @@ class WeatherDecription extends Component {
                         </a>
                     </div>
                     <div className="flex flex-nowrap gap-4 justify-between">
-                        <div className="bg-black bg-opacity-30 border border-gray-600 w-full h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200 hover:-translate-y-1 select-none">
-                            <div className="col-span-1">
-                                <img
-                                    src="assets/weather_icons/thunderstorm.png"
-                                    className="w-full h-full object-contain"
-                                    alt=""
-                                />
-                            </div>
-                            <div
-                                className="col-span-1 text-5xl text-center"
-                                style={{ lineHeight: "4rem" }}>
-                                17&deg;
-                            </div>
-                            <div className="col-span-2 pt-2">
-                                <p
-                                    className="font-semibold text-lg"
-                                    style={{ lineHeight: "32px" }}>
-                                    Liverpool, UK
-                                </p>
-                                <p className="font-light text-sm text-gray-400">
-                                    Thunderstorms
-                                </p>
-                            </div>
-                        </div>
-                        <div className="bg-black bg-opacity-30 border border-gray-600 w-full h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 select-none">
-                            <div className="col-span-1">
-                                <img
-                                    src="assets/weather_icons/snow_sun.png"
-                                    className="w-full h-full object-contain"
-                                    alt=""
-                                />
-                            </div>
-                            <div
-                                className="col-span-1 text-5xl text-center"
-                                style={{ lineHeight: "4rem" }}>
-                                -2&deg;
-                            </div>
-                            <div className="col-span-2 pt-2">
-                                <p
-                                    className="font-semibold text-lg"
-                                    style={{ lineHeight: "32px" }}>
-                                    Palermo, Italy
-                                </p>
-                                <p className="font-light text-sm text-gray-400">
-                                    Cloudy with Sun
-                                </p>
-                            </div>
-                        </div>
+                        <OtherLocationCard loc="Liverpool, UK" temp={17} weather="Thunderstorms" icon="thunderstorm" />
+                        <OtherLocationCard loc="Palermo, Italy" temp={9} weather="Cloudy with Sun" icon="snow_sun" />
+
                     </div>
                 </div>
             </div>

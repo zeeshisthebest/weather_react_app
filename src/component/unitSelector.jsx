@@ -29,17 +29,11 @@ const getUnit = (unit, isSlctd, onUnitSelect) => {
 const UnitSelector = ({ isMetric, onUnitSelect }) => {
     return (
         <>
-            {getUnit("C", isMetric, () => {
-                onUnitSelect(true);
-                console.log("celcuis");
-            })}
+            {getUnit("C", isMetric, () => onUnitSelect(true))}
             <span className="text-xl align-top mt-2 inline-block select-none">
                 &nbsp;|&nbsp;
             </span>
-            {getUnit("F", !isMetric, () => {
-                onUnitSelect(false);
-                console.log("farhaein");
-            })}
+            {getUnit("F", !isMetric, () => onUnitSelect(false))}
         </>
     );
 };
