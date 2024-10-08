@@ -2,11 +2,11 @@ import { ChartsReferenceLine, LineChart, lineElementClasses, markElementClasses,
 import PropTypes from "prop-types";
 import React from "react";
 
-const WeeklyWeatherGraph = ({ data, currentDay }) => {
+const WeeklyWeatherGraph = ({ data: weeklyWeather, currentDay }) => {
 
-    const weeklyWeather = [28, 20, 28, 20, 29, 20, 28];
-    const low = Math.min(...weeklyWeather);
-    const high = Math.max(...weeklyWeather);
+
+    const low = weeklyWeather && Math.min(...weeklyWeather);
+    const high = weeklyWeather && Math.max(...weeklyWeather);
     let avg = (low + high) / 2;
 
     return (
@@ -14,7 +14,7 @@ const WeeklyWeatherGraph = ({ data, currentDay }) => {
             <LineChart
                 xAxis={[
                     {
-                        data: [0.6, 1, 2, 3, 4, 5, 6, 7, 7.3]
+                        data: [0, 0.1, 0.5, 1, 1.6, 2.25, 2.75, 3.4, 3.8, 4.4, 4.8, 5.45, 5.9, 6.5, 7, 7.5]
                     }
                 ]}
                 yAxis={[{
@@ -25,7 +25,7 @@ const WeeklyWeatherGraph = ({ data, currentDay }) => {
                     {
                         data: [avg, ...weeklyWeather, avg],
                         color: "#ccc",
-                        showMark: ({ index }) => index === currentDay + 1,
+                        showMark: ({ index }) => index === currentDay + 2,
                         disableHighlight: true,
                     },
                 ]}
@@ -55,7 +55,7 @@ const WeeklyWeatherGraph = ({ data, currentDay }) => {
                     </radialGradient>
                 </defs>
                 <ChartsReferenceLine
-                    x={currentDay + 1}
+                    x={currentDay + 0.5}
                     label=""
                     lineStyle={{ stroke: 'darkgray', strokeDasharray: 7 }}
                 />

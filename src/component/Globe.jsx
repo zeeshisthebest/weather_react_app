@@ -67,14 +67,14 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
         chart.animate({
             key: "rotationX",
             to: -longitude,
-            duration: 1500,
+            duration: 4000, from: 0,
             easing: am5.ease.inOut(am5.ease.cubic),
         });
 
         chart.animate({
             key: "rotationY",
             to: -latitude,
-            duration: 1500,
+            duration: 4000, from: 0,
             easing: am5.ease.inOut(am5.ease.cubic),
         });
 
@@ -84,7 +84,7 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
         });
 
         // Animate chart appearance
-        chart.appear(1000, 100);
+        chart.appear(1000, 1000);
 
         // Clean up resources when component unmounts
         return () => {

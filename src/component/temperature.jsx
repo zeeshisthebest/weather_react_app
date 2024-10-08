@@ -1,32 +1,33 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import UnitSelector from "./unitSelector";
 import PropTypes from "prop-types";
 import HiLow from "./hiLow";
-import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
+import { UseMetricsContext } from "../contexts/contexts";
 
 const cToF = (temp) => {
     return temp * (9 / 5) + 32;
 };
 
 const Temprature = (props) => {
-    const [temperature, setTemparature] = useState({ tempC: 0, tempF: 32 });
+
     const hi = 32;
     const low = 23;
 
     const tmp = useContext(UseMetricsContext);
 
     // Handles the change of temperature upon unit select
-    const handleUnitSelect = (changeToMetric) => {
-        console.log('trigger');
-
-        tmp.onChange(changeToMetric);
+    const handleUnitSelect = (val) => {
+        tmp.onChange(val);
     };
+
+    let currentTemp = tmp.metric ? props.tempC : props.tempF;
+    currentTemp = Math.round(currentTemp);
 
     return (
         <div className="row-span-1 flex flex-nowrap text-gray-300">
             <div className="flex gap-6 w-8/12">
                 <div className="text-8xl" style={{ lineHeight: "96px" }}>
-                    {tmp.metric ? temperature.tempC : temperature.tempF}
+                    {currentTemp}
                     <UnitSelector isMetric={tmp.metric} onUnitSelect={handleUnitSelect} />
                 </div>
                 <div className="w-32 text-center text-slate-300 text-lg flex flex-col justify-evenly p-2 items-stretch gap-1">
@@ -44,7 +45,8 @@ const Temprature = (props) => {
 };
 
 Temprature.propTypes = {
-    temperature: PropTypes.number.isRequired,
+    tempC: PropTypes.number.isRequired,
+    tempF: PropTypes.number.isRequired
 };
 
 export default Temprature;

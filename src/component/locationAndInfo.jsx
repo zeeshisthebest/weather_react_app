@@ -15,7 +15,7 @@ const LocationAndInfo = ({
     humidity,
     feelsLike,
     visibility,
-    isCelcius,
+    isMetric,
 }) => {
     const dateObj = new Date();
     let dateString = dateObj.toDateString().split(' ');
@@ -33,15 +33,15 @@ const LocationAndInfo = ({
             <div className="w-4/12 grid grid-cols-3 grid-rows-1 gap-3">
                 <InfoCard unit="%" title="Humidity" value={humidity} icon={faDroplet} />
                 <InfoCard
-                    unit={`\u00b0${isCelcius ? "C" : "F"}`}
+                    unit={`\u00b0${isMetric ? "C" : "F"}`}
                     title="Feels Like"
-                    value={feelsLike}
+                    value={Math.round(feelsLike)}
                     icon={faTemperatureLow}
                 />
                 <InfoCard
-                    unit="kM"
+                    unit={isMetric ? "kM" : "Mi"}
                     title="Visibility"
-                    value={visibility}
+                    value={Math.round(visibility)}
                     icon={faEye}
                 />
             </div>
@@ -62,7 +62,7 @@ LocationAndInfo.propTypes = {
     location: PropTypes.string.isRequired,
     feelsLike: PropTypes.number.isRequired,
     visibility: PropTypes.number.isRequired,
-    isCelcius: PropTypes.bool.isRequired,
+    isMetric: PropTypes.bool.isRequired,
 };
 
 export default LocationAndInfo;

@@ -19,7 +19,7 @@ function mapWeatherToModel(weatherData, astroData){
             tempF: weatherData.current.temp_f,
             humidity: weatherData.current.humidity,
             feelC: weatherData.current.feelslike_c,
-            feelf: weatherData.current.feelslike_f,
+            feelF: weatherData.current.feelslike_f,
             uv: weatherData.current.uv,
             visKm: weatherData.current.vis_km,
             visMi: weatherData.current.vis_miles,
