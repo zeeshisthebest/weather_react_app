@@ -39,7 +39,7 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
 
     useEffect(() => {
         setIs24(localStorageService.getIs24());
-    })
+    }, [])
 
     return (
         <div className="w-full flex flex-nowrap mt-7 mb-10 justify-around gap-0 relative">

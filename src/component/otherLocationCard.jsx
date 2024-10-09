@@ -12,17 +12,17 @@ const OtherLocationCard = ({ loc, icon }) => {
         try {
             let resp = await currentWeatherService.getCurrentWeather(loc);
             let mdl = currentWeatherService.mapToRecentModel(resp.data);
-            console.log(mdl);
-            setWeather(currentWeatherService.mapToRecentModel(resp.data));
+            setWeather(mdl);
         } catch (error) {
             console.log(error);
             toast.error("Unable to load Recent");
         }
     }, [loc]);
 
+
     useEffect(() => {
         getWeather();
-    }, [loc]);
+    }, [getWeather]);
 
 
     let temp = metricCtxt.metric ? wthr.tempC : wthr.tempF;
