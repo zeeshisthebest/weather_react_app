@@ -86,7 +86,7 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
         }, 2000);
 
         // Animate chart appearance
-        chart.appear(1000, 1000);
+        chart.appear(1000, 100);
 
         // Clean up resources when component unmounts
         return () => {

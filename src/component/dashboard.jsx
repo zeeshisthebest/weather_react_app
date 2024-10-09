@@ -3,7 +3,7 @@ import LeftSideBar from "./leftSideBar";
 import MainContent from "./mainContent";
 import LoadingIcon from "./common/loadingIcon";
 import weatherIcons from "./utils/weatherIcons";
-import { getLocation, setLocation } from "../services/localStorageService";
+import storageService from "../services/localStorageService";
 import { getLocationFromIp } from "../services/ipLocationService";
 import { toast } from "react-toastify";
 import weatherService from "../services/currentWeatherService";
@@ -23,13 +23,13 @@ class DashboardView extends Component {
      * @returns none
      */
     setLocation = async () => {
-        let loc = getLocation();
+        let loc = storageService.getLocation();
         if (!loc) {
             console.log("No location found");
             try {
                 let locFromIp = await getLocationFromIp();
                 loc = locFromIp.city;
-                setLocation(loc);
+                storageService.setLocation(loc);
                 toast.success("IP Location: " + loc);
             } catch (error) {
                 loc = "London"; // defualting

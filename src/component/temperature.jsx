@@ -4,10 +4,6 @@ import PropTypes from "prop-types";
 import HiLow from "./hiLow";
 import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
 
-const cToF = (temp) => {
-    return temp * (9 / 5) + 32;
-};
-
 const Temprature = (props) => {
 
     const metricCtxt = useContext(UseMetricsContext);
@@ -33,7 +29,7 @@ const Temprature = (props) => {
                     <UnitSelector isMetric={metricCtxt.metric} onUnitSelect={handleUnitSelect} />
                 </div>
                 <div className="w-32 text-center text-slate-300 text-lg flex flex-col justify-evenly p-2 items-stretch gap-1">
-                    <HiLow hiTemp={hi} lowTemp={low} />
+                    <HiLow hiTemp={hi ?? 0} lowTemp={low ?? 0} />
                 </div>
             </div>
             <div className="py-1 flex flex-col justify-center w-4/12">
