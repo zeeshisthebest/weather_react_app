@@ -18,6 +18,7 @@ const Temprature = (props) => {
      * @param {bool} val sets the unit to be metric or not
      */
     const handleUnitSelect = (val) => {
+
         metricCtxt.onChange(val);
     };
 

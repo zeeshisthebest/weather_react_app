@@ -24,8 +24,8 @@ const WeatherDecription = ({ condition }) => {
                     </a>
                 </div>
                 <div className="flex flex-nowrap gap-4 justify-between">
-                    <OtherLocationCard loc="Liverpool, UK" temp={17} weather="Thunderstorms" icon="thunderstorm" />
-                    <OtherLocationCard loc="Palermo, Italy" temp={9} weather="Cloudy with Sun" icon="snow_sun" />
+                    <OtherLocationCard loc="Liverpool" temp={17} weather="Thunderstorms" icon="thunderstorm" />
+                    <OtherLocationCard loc="Palermo" temp={9} weather="Cloudy with Sun" icon="snow_sun" />
 
                 </div>
             </div>

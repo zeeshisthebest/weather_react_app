@@ -4,6 +4,7 @@ import Temprature from "./temperature";
 import WeatherDecription from "./weatherDesc";
 import WeeklyWeather from "./weeklyWeather";
 import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
+import localStorageService from "../services/localStorageService";
 
 class MainContent extends Component {
     static contextType = WeatherContext;
@@ -17,7 +18,14 @@ class MainContent extends Component {
         this.setState({
             useMetric: val,
         });
+        localStorageService.setMetricPreference(val);
     };
+
+    componentDidMount () {
+        this.setState({
+            useMetric: localStorageService.getMetricPreference()
+        });
+    }
 
 
     render () {

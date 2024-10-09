@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { SwitchAirbnb } from "./utils/switchStyle.ts";
+import localStorageService from "../services/localStorageService.js";
 
 /**
  *
@@ -10,7 +11,12 @@ import { SwitchAirbnb } from "./utils/switchStyle.ts";
  */
 
 const to24 = (time) => {
+    console.log(time);
+
     let [time2, amPm] = time.split(" ");
+    //Before the data is loaded
+    if (!amPm) return time;
+
     let [hr, min] = time2.split(':');
     if (amPm.toLowerCase() === 'pm') {
         return hr === "12" ? time2 : `${parseInt(hr) + 12}:${min}`;
@@ -26,8 +32,14 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
 
     // switches time from/to AM-PM
     const handleHrSwitch = () => {
-        setIs24(!is24);
+        let newIs24 = !is24;
+        setIs24(newIs24);
+        localStorageService.setIs24(newIs24);
     };
+
+    useEffect(() => {
+        setIs24(localStorageService.getIs24());
+    })
 
     return (
         <div className="w-full flex flex-nowrap mt-7 mb-10 justify-around gap-0 relative">

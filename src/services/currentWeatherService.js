@@ -35,6 +35,16 @@ function mapWeatherToModel(weatherData, astroData){
     }
 }
 
+function mapToRecentModel(weather){
+    return {
+        condition: weather.current.condition.text,
+        tempC: weather.current.temp_c,
+        tempF: weather.current.temp_f,
+        name: weather.location.name,
+        country: weather.location.country
+    }
+}
+
 
 /**
  *
@@ -69,6 +79,7 @@ const currentWeatherService = {
     getCurrentWeather,
     getAstroData,
     mapWeatherToModel,
+    mapToRecentModel
 }
 
 export default currentWeatherService;
