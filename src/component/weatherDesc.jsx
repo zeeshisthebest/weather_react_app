@@ -8,7 +8,7 @@ const WeatherDecription = ({ condition }) => {
     return (
         <div className="row-span-2 flex flex-nowrap">
             <div className="w-8/12 text-6xl flex flex-row justify-start align-middle items-center font-sans font-medium">
-                <p className="bg-gradient-to-r from-slate-500 to-slate-100 inline-block bg-clip-text text-transparent">
+                <p className="bg-gradient-to-r from-slate-500 to-slate-100 inline-block bg-clip-text text-transparent pb-2">
                     {condition}
                 </p>
             </div>
