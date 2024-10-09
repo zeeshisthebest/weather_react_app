@@ -9,7 +9,7 @@ class LeftSideBar extends Component {
     static contextType = WeatherContext;
 
     render () {
-        const { location: loc, astro, weather } = this.context;
+        const { location: loc, astro, weather } = this.context.data;
         return (
             <div className="col-span-1 bg-white bg-opacity-10 border-[0] border-[#aaa] rounded-xl p-4">
                 <Globe

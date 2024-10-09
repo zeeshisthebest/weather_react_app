@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import UnitSelector from "./unitSelector";
 import PropTypes from "prop-types";
 import HiLow from "./hiLow";
-import { UseMetricsContext } from "../contexts/contexts";
+import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
 
 const cToF = (temp) => {
     return temp * (9 / 5) + 32;
@@ -10,28 +10,30 @@ const cToF = (temp) => {
 
 const Temprature = (props) => {
 
-    const hi = 32;
-    const low = 23;
-
-    const tmp = useContext(UseMetricsContext);
-
-    // Handles the change of temperature upon unit select
-    const handleUnitSelect = (val) => {
-        tmp.onChange(val);
-    };
-
-    let currentTemp = tmp.metric ? props.tempC : props.tempF;
+    const metricCtxt = useContext(UseMetricsContext);
+    const weatherCtxt = useContext(WeatherContext);
+    let currentTemp = metricCtxt.metric ? props.tempC : props.tempF;
     currentTemp = Math.round(currentTemp);
+    let hi = metricCtxt.metric ? weatherCtxt.minMax.maxC : weatherCtxt.minMax.maxF;
+    let low = metricCtxt.metric ? weatherCtxt.minMax.minC : weatherCtxt.minMax.minF;
+
+    /**
+     *
+     * @param {bool} val sets the unit to be metric or not
+     */
+    const handleUnitSelect = (val) => {
+        metricCtxt.onChange(val);
+    };
 
     return (
         <div className="row-span-1 flex flex-nowrap text-gray-300">
             <div className="flex gap-6 w-8/12">
                 <div className="text-8xl" style={{ lineHeight: "96px" }}>
                     {currentTemp}
-                    <UnitSelector isMetric={tmp.metric} onUnitSelect={handleUnitSelect} />
+                    <UnitSelector isMetric={metricCtxt.metric} onUnitSelect={handleUnitSelect} />
                 </div>
                 <div className="w-32 text-center text-slate-300 text-lg flex flex-col justify-evenly p-2 items-stretch gap-1">
-                    <HiLow hiTemp={tmp.metric ? hi : cToF(hi)} lowTemp={tmp.metric ? low : cToF(low)} />
+                    <HiLow hiTemp={hi} lowTemp={low} />
                 </div>
             </div>
             <div className="py-1 flex flex-col justify-center w-4/12">

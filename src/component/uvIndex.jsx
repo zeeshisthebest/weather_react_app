@@ -8,7 +8,7 @@ const guageOptions = {
     cornerRadius: 4,
     nrOfLevels: 30,
     arcPadding: 0.045,
-    animDelay: 3000,
+    animate: false,
     arcWidth: 0.15,
     needleScale: 0.6,
     colors: ["#00ff00", "#FF0000"],

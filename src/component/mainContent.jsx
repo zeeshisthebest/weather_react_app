@@ -19,20 +19,22 @@ class MainContent extends Component {
         });
     };
 
+
     render () {
-        const { location, weather } = this.context;
+        const { location, weather } = this.context.data;
+        const { useMetric } = this.state;
         return (
             <UseMetricsContext.Provider
                 value={{
-                    metric: this.state.useMetric,
+                    metric: useMetric,
                     onChange: this.handleUnitChange,
                 }}>
                 <div className="col-span-4 grid grid-rows-6 w-full h-full">
                     <LocationAndInfo
                         location={`${location?.name ?? ""}, ${location?.region ?? ""}, ${location?.country ?? ""}`}
-                        isMetric={this.state.useMetric}
-                        visibility={this.state.useMetric ? weather?.visKm ?? 0 : weather?.visMi ?? 0}
-                        feelsLike={this.state.useMetric ? weather?.feelC ?? 0 : weather?.feelF ?? 0}
+                        isMetric={useMetric}
+                        visibility={useMetric ? weather?.visKm ?? 0 : weather?.visMi ?? 0}
+                        feelsLike={useMetric ? weather?.feelC ?? 0 : weather?.feelF ?? 0}
                         humidity={weather?.humidity ?? 0}
                     />
                     <Temprature tempC={weather?.tempC ?? 0} tempF={weather?.tempF ?? 0} />

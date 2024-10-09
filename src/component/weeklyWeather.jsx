@@ -7,6 +7,7 @@ import {
     mapWeeklyWeatherToModel,
 } from "../services/weeklyWeatherService";
 import { toast } from "react-toastify";
+import { WeatherContext } from "../contexts/contexts";
 
 class WeeklyWeather extends Component {
     state = {
@@ -14,6 +15,8 @@ class WeeklyWeather extends Component {
         weeklyWeather: [],
         dataForDisplay: [],
     };
+
+    static contextType = WeatherContext;
 
     indexForToday = 0;
 
@@ -25,6 +28,7 @@ class WeeklyWeather extends Component {
                 weeklyWeather: wthr,
             });
             this.populateArray();
+            this.context.setMinMax(wthr[0]);
         } catch (error) {
             toast.error("Error! Failed to get weekly Weather Updates");
         }

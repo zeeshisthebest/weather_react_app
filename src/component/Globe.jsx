@@ -64,24 +64,26 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
             return am5.Bullet.new(root, { sprite: circle });
         });
 
-        chart.animate({
-            key: "rotationX",
-            to: -longitude,
-            duration: 4000, from: 0,
-            easing: am5.ease.inOut(am5.ease.cubic),
-        });
+        setTimeout(() => {
+            chart.animate({
+                key: "rotationX",
+                to: -longitude,
+                duration: 4000, from: 0,
+                easing: am5.ease.inOut(am5.ease.cubic),
+            });
 
-        chart.animate({
-            key: "rotationY",
-            to: -latitude,
-            duration: 4000, from: 0,
-            easing: am5.ease.inOut(am5.ease.cubic),
-        });
+            chart.animate({
+                key: "rotationY",
+                to: -latitude,
+                duration: 4000, from: 0,
+                easing: am5.ease.inOut(am5.ease.cubic),
+            });
 
-        pointSeries.data.push({
-            geometry: { type: "Point", coordinates: [longitude, latitude] },
-            title: placeName,
-        });
+            pointSeries.data.push({
+                geometry: { type: "Point", coordinates: [longitude, latitude] },
+                title: placeName,
+            });
+        }, 2000);
 
         // Animate chart appearance
         chart.appear(1000, 1000);

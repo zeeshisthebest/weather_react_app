@@ -13,6 +13,7 @@ class DashboardView extends Component {
     state = {
         weatherBg: weatherIcons.wBg.clearNight,
         data: {},
+        minMax: {}
     };
 
 
@@ -59,6 +60,14 @@ class DashboardView extends Component {
         }
     };
 
+    /**
+     *
+     * @param {objecy} minMax The minimun and maximum for today
+     */
+    setMinMax = (minMax) => {
+        this.setState({ minMax });
+    }
+
     componentDidMount () {
         let retries = 0;
         while (!Object.keys(this.state.data).length && retries <= 3) {
@@ -77,7 +86,7 @@ class DashboardView extends Component {
                 className="bg-black bg-[image:var(--weather-bg-img)] bg-center bg-cover bg-opacity-30 w-4/5 min-h-[600px] rounded-3xl shadow-lg shadow-black px-9 py-12 bg-blend-overlay flex justify-center items-center relative overflow-hidden"
                 style={{ "--weather-bg-img": weatherBg }}>
                 <div className="grid grid-cols-5 gap-9 w-full h-full">
-                    <WeatherContext.Provider value={this.state.data}>
+                    <WeatherContext.Provider value={{ data: this.state.data, setMinMax: this.setMinMax, minMax: this.state.minMax }}>
                         <LeftSideBar />
                         <MainContent />
                     </WeatherContext.Provider>
