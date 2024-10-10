@@ -11,7 +11,7 @@ import { WeatherContext } from "../contexts/contexts";
 
 class DashboardView extends Component {
     state = {
-        weatherBg: weatherIcons.wBg.cloudyNight,
+        weatherBg: weatherIcons.wBg.lightSnowNight,
         data: {},
         minMax: {}
     };
@@ -43,7 +43,7 @@ class DashboardView extends Component {
 
     /**
      *
-     * @param {string} location Name to fetch location of
+     * First it finds the location and after it calls API to fetch weather
      */
     getWeather = async () => {
         const location = await this.setLocation();
@@ -62,11 +62,13 @@ class DashboardView extends Component {
 
     /**
      *
-     * @param {objecy} minMax The minimun and maximum for today
+     * @param {object} minMax The minimun and maximum for today
      */
     setMinMax = (minMax) => {
         this.setState({ minMax });
     }
+	
+
 
     componentDidMount () {
         let retries = 0;

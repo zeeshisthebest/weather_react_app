@@ -3,16 +3,29 @@ const recent = "recent";
 const metric = 'metric';
 const is24 = 'is24';
 
+
+/**
+ *
+ * @returns The name of Current Location
+ */
 function getLocation() {
   return localStorage.getItem(loc);
 }
 
-// The list of recent searches, max 10
+/**
+ *
+ * @returns The list of recent searches, max 10
+ */
 function getRecentSearched() {
   let recentItems =  localStorage.getItem(recent);
   return recentItems ?  JSON.parse(recentItems) : null;
 }
 
+/**
+ *
+ * @param {string} value The Name of current location
+ * @returns
+ */
 function setLocation(value) {
   try {
     localStorage.setItem(loc, value);
@@ -35,6 +48,7 @@ function setRecentSearched(newLoc) {
   if (recentlySearched) {
     recentArray = JSON.parse(recentlySearched);
   }
+  recentArray = recentArray.filter(loc => loc !== newLoc);
   recentArray.unshift(newLoc); // put the current one at index=0
   recentArray = recentArray.slice(0, maxLen); // Trim the array
   localStorage.setItem(recent, JSON.stringify(recentArray)); // Store again
