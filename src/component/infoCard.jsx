@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const InfoCard = ({ title, icon, value, unit }) => {
-    return (<div className="bg-white bg-opacity-15 rounded-md overflow-hidden p-1">
+    return (<div className="bg-white bg-opacity-15 rounded-md overflow-hidden p-1 backdrop-blur-[2px]">
         <div className="h-1/3 text-gray-400 text-center flex justify-center items-center text-sm">
             <p className="mr-2">{title}</p><FontAwesomeIcon icon={icon} />
         </div>

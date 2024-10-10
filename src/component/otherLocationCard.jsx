@@ -8,6 +8,7 @@ const OtherLocationCard = ({ loc, icon }) => {
     const [wthr, setWeather] = useState({});
     const metricCtxt = useContext(UseMetricsContext);
 
+    // Fetches weather for the location of card
     const getWeather = useCallback(async () => {
         try {
             let resp = await currentWeatherService.getCurrentWeather(loc);

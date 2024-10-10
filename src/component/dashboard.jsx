@@ -11,7 +11,7 @@ import { WeatherContext } from "../contexts/contexts";
 
 class DashboardView extends Component {
     state = {
-        weatherBg: weatherIcons.wBg.clearNight,
+        weatherBg: weatherIcons.wBg.cloudyNight,
         data: {},
         minMax: {}
     };
