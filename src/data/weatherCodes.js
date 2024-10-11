@@ -1,4 +1,6 @@
-{
+import weatherIcons from "../component/utils/weatherIcons"
+
+let codes = {
   "C1000": {
     "bgDay": "sunnyDay",
     "bgNight": "clearNight",
@@ -287,4 +289,23 @@
     "iconDay": "snow",
     "iconNight": "snow"
   }
+}
+
+
+/**
+ *
+ * @param {number} code Weather Code
+ * @returns The path to the bgImage
+ */
+export function getWeatherBg(code){
+  return weatherIcons.wBg[codes[`C${code}`].bgDay];
+}
+
+/**
+ *
+ * @param {number} code  Weather Code
+ * @returns The path to the Icon
+ */
+export function getWeatherIcons(code){
+
 }

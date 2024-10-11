@@ -15,6 +15,7 @@ function mapWeatherToModel(weatherData, astroData){
    return {
         weather: {
             condition:  weatherData.current.condition.text,
+            code:  weatherData.current.condition.code,
             tempC: weatherData.current.temp_c,
             tempF: weatherData.current.temp_f,
             humidity: weatherData.current.humidity,

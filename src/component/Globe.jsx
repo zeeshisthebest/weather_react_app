@@ -92,7 +92,7 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
         return () => {
             root.dispose();
         };
-    });
+    }, [latitude, longitude]);
 
     return (
         <div className="w-full">
