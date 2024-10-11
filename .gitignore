@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/assets_not_to_be_pushed_to_repo
 # misc
 .DS_Store
 .env
