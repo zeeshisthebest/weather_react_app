@@ -29,6 +29,30 @@ const weatherBackgrounds = {
 };
 
 const weatherSymbols = {
+    haze: "/assets/img/haze.png",
+    heavyShower: "/assets/img/heavy_shower.png",
+    icePellets: "/assets/img/ice_pellets.png",
+    lightRain: "/assets/img/lightrain.png",
+    lightRainDay: "/assets/img/light_rain_day.png",
+    lightRainNight: "/assets/img/light_rain_night.png",
+    lightSnowDay: "/assets/img/light_snow_day.png",
+    lightSnowNight: "/assets/img/light_snow_night.png",
+    mist: "/assets/img/mist.png",
+    overcast: "/assets/img/overcast.png",
+    partlyCloudyDay: "/assets/img/partly_cloudy_day.png",
+    partlyCloudyNight: "/assets/img/partly_cloudy_night.png",
+    rain: "/assets/img/rain.png",
+    rainSnow: "/assets/img/rain_snow.png",
+    snow: "/assets/img/snow.png",
+    shower: "/assets/img/shower.png",
+    sunny: "/assets/img/sunny.png",
+    thunderDay: "/assets/img/thunder_day.png",
+    thunderNight: "/assets/img/thunder_night.png",
+    thunderstorm: "/assets/img/thunderstorm.png",
+    windy: "/assets/img/windy.png",
+    windyCloudy: "/assets/img/windy_cloudy.png",
+    windyDay: "/assets/img/windy_day.png",
+    windyNight: "/assets/img/windy_night.png",
 
 }
 

@@ -136,14 +136,14 @@ let codes = {
   "C1192": {
     "bgDay": "heavyRain",
     "bgNight": "heavyRain",
-    "iconDay": "lightrain",
-    "iconNight": "lightrain"
+    "iconDay": "lightRain",
+    "iconNight": "lightRain"
   },
   "C1195": {
     "bgDay": "stormyDay",
     "bgNight": "stormyNight",
-    "iconDay": "heavy_shower",
-    "iconNight": "heavy_shower"
+    "iconDay": "heavyShower",
+    "iconNight": "heavyShower"
   },
   "C1198": {
     "bgDay": "freezingRain",
@@ -154,8 +154,8 @@ let codes = {
   "C1201": {
     "bgDay": "nightRain",
     "bgNight": "nightRain",
-    "iconDay": "heavy_shower",
-    "iconNight": "heavy_shower"
+    "iconDay": "heavyShower",
+    "iconNight": "heavyShower"
   },
   "C1204": {
     "bgDay": "sleet",
@@ -208,8 +208,8 @@ let codes = {
   "C1237": {
     "bgDay": "snowStorm",
     "bgNight": "snowStorm",
-    "iconDay": "ice_pellets",
-    "iconNight": "ice_pellets"
+    "iconDay": "icePellets",
+    "iconNight": "icePellets"
   },
   "C1240": {
     "bgDay": "drizzleDay",
@@ -226,8 +226,8 @@ let codes = {
   "C1246": {
     "bgDay": "torrentailRain",
     "bgNight": "torrentailRain",
-    "iconDay": "heavy_shower",
-    "iconNight": "heavy_shower"
+    "iconDay": "heavyShower",
+    "iconNight": "heavyShower"
   },
   "C1249": {
     "bgDay": "sleet",
@@ -256,20 +256,20 @@ let codes = {
   "C1261": {
     "bgDay": "icePellets",
     "bgNight": "icePellets",
-    "iconDay": "ice_pellets",
-    "iconNight": "ice_pellets"
+    "iconDay": "icePellets",
+    "iconNight": "icePellets"
   },
   "C1264": {
     "bgDay": "icePellets",
     "bgNight": "icePellets",
-    "iconDay": "ice_pellets",
-    "iconNight": "ice_pellets"
+    "iconDay": "icePellets",
+    "iconNight": "icePellets"
   },
   "C1273": {
     "bgDay": "lightRain",
     "bgNight": "lightRain",
-    "iconDay": "lightrain",
-    "iconNight": "lightrain"
+    "iconDay": "lightRain",
+    "iconNight": "lightRain"
   },
   "C1276": {
     "bgDay": "stormyDay",
