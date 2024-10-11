@@ -1,44 +1,50 @@
 const weatherBackgrounds = {
     clearNight: "/assets/img/clear_night.jpeg",
-    sunnyDay: "/assets/img/sunny_day.jpg",
     cloudyDay: "/assets/img/cloudy_day.jpg",
     cloudyEvening: "/assets/img/cloudy_evening.jpg",
     cloudyNight: "/assets/img/cloudy_night2.jpg",
-    stormyNight: "/assets/img/stormy_night.jpg",
-    stormyDay: "/assets/img/thunderstorm_day.jpg",
-    windstorm: "/assets/img/windstorm.jpg",
-    partlyCloudyDay: "/assets/img/partly_cloudy.jpg",
-    heavyRain: "/assets/img/heavy_rain.jpg",
-    nightRain: "/assets/img/night_rain.jpg",
-    fogDay: "/assets/img/fog_day.jpg",
-    mistDay: "/assets/img/mist_day.jpg",
-    mistNight: "/assets/img/mist_night.jpg",
-    snow: "/assets/img/snow.jpg",
-    snowStorm: "/assets/img/snow_storm.jpg",
-    overcastDay:  "/assets/img/overcast_day.jpg",
-    overcastNight:  "/assets/img/overcast_night.jpg",
-    lightRainDay:  "/assets/img/light_rain_day.jpg",
-    lightSnowNight: "/assets/img/light_snow_night.jpg",
-    lightSnowDay: "/assets/img/light_snow_day.jpg",
-    freezingRain: "/assets/img/freezing_rain.jpg",
     drizzleDay: "/assets/img/drizzle_day.jpg",
-    sleet: "/assets/img/sleet.jpg",
-    torrentailRain: "/assets/img/torrential_rain.jpg",
+    fogDay: "/assets/img/fog_day.jpg",
+    freezingRain: "/assets/img/freezing_rain.jpg",
+    heavyRain: "/assets/img/heavy_rain.jpg",
     icePellets: "/assets/img/ice_pellets.jpg",
     lightRain: "/assets/img/light_rain.jpg",
+    lightRainDay: "/assets/img/light_rain_day.jpg",
+    lightSnowNight: "/assets/img/light_snow_night.jpg",
+    lightSnowDay: "/assets/img/light_snow_day.jpg",
+    mistDay: "/assets/img/mist_day.jpg",
+    mistNight: "/assets/img/mist_night.jpg",
+    nightRain: "/assets/img/night_rain.jpg",
+    overcastDay: "/assets/img/overcast_day.jpg",
+    overcastNight: "/assets/img/overcast_night.jpg",
+    partlyCloudyDay: "/assets/img/partly_cloudy.jpg",
+    sunnyDay: "/assets/img/sunny_day.jpg",
+    stormyNight: "/assets/img/stormy_night.jpg",
+    stormyDay: "/assets/img/thunderstorm_day.jpg",
+    snow: "/assets/img/snow.jpg",
+    snowStorm: "/assets/img/snow_storm.jpg",
+    sleet: "/assets/img/sleet.jpg",
+    torrentailRain: "/assets/img/torrential_rain.jpg",
+    windstorm: "/assets/img/windstorm.jpg",
 };
 
 const weatherSymbols = {
+    cloudDay: "/assets/img/cloudy_day.png",
+    cloudNight: "/assets/img/cloudy_night.png",
+    clearNight: "/assets/img/clear.png",
+    fog: "/assets/img/fog.png",
     haze: "/assets/img/haze.png",
+    hailDay: "/assets/img/hail_night.png",
+    hailNight: "/assets/img/hail_night.png",
     heavyShower: "/assets/img/heavy_shower.png",
     icePellets: "/assets/img/ice_pellets.png",
+    mist: "/assets/img/mist.png",
+    overcast: "/assets/img/overcast.png",
     lightRain: "/assets/img/lightrain.png",
     lightRainDay: "/assets/img/light_rain_day.png",
     lightRainNight: "/assets/img/light_rain_night.png",
     lightSnowDay: "/assets/img/light_snow_day.png",
     lightSnowNight: "/assets/img/light_snow_night.png",
-    mist: "/assets/img/mist.png",
-    overcast: "/assets/img/overcast.png",
     partlyCloudyDay: "/assets/img/partly_cloudy_day.png",
     partlyCloudyNight: "/assets/img/partly_cloudy_night.png",
     rain: "/assets/img/rain.png",
@@ -53,10 +59,7 @@ const weatherSymbols = {
     windyCloudy: "/assets/img/windy_cloudy.png",
     windyDay: "/assets/img/windy_day.png",
     windyNight: "/assets/img/windy_night.png",
-
-}
-
-
+};
 
 const weatherIcons = {
     /**
@@ -66,8 +69,8 @@ const weatherIcons = {
     /**
      * Symbols related to the weather condition
      */
-    wIc: weatherSymbols
-}
+    wIc: weatherSymbols,
+};
 
 export default weatherIcons;
 
