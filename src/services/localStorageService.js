@@ -31,7 +31,6 @@ function setLocation(value) {
     localStorage.setItem(loc, value);
     setRecentSearched(loc);
   } catch (error) {
-    console.log(error);
     return;
   }
 }
@@ -59,11 +58,9 @@ function setRecentSearched(newLoc) {
  * @param {bool} val is metric preferred
  */
 function setMetricPreference(val){
-  console.log('setting metric')
   try{
     localStorage.setItem(metric, JSON.stringify(val));
   } catch (e) {
-    console.log(e);
   }
 }
 
@@ -82,7 +79,7 @@ function getMetricPreference(){
 function setIs24(val){
   try{
     localStorage.setItem(is24, JSON.stringify(val));
-  } catch (e) {console.log(e);}
+  } catch (e) {}
 }
 
 /**

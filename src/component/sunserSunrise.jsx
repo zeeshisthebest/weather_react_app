@@ -11,8 +11,6 @@ import localStorageService from "../services/localStorageService.js";
  */
 
 const to24 = (time) => {
-    console.log(time);
-
     let [time2, amPm] = time.split(" ");
     //Before the data is loaded
     if (!amPm) return time;

@@ -15,6 +15,7 @@ class DashboardView extends Component {
         weatherBg: weatherIcons.wBg.lightSnowNight,
         data: {},
         minMax: {},
+        updatedAt: null,
     };
 
     dashboardRef = React.createRef();
@@ -56,7 +57,13 @@ class DashboardView extends Component {
                 weather.data,
                 astro.data
             );
-            this.setState({ data: weatherData });
+            this.setState({
+                data: weatherData,
+                updatedAt: new Date().toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
+            });
             this.setBackground(getWeatherBg(weatherData.weather.code));
         } catch (error) {
             console.log(error);
@@ -77,7 +84,10 @@ class DashboardView extends Component {
      * @param {string} imgPath Type of image based on the weather condition
      */
     setBackground = (imgPath) => {
-        this.dashboardRef.current.style.setProperty("--weather-bg-img", `url(${imgPath})`);
+        this.dashboardRef.current.style.setProperty(
+            "--weather-bg-img",
+            `url(${imgPath})`
+        );
     };
 
     componentDidMount () {
@@ -91,12 +101,11 @@ class DashboardView extends Component {
     }
 
     render () {
-        // let weatherBg = `url(${this.state.weatherBg})`;
         const { data, weatherBg, minMax } = this.state;
 
         return (
             <main
-                className="bg-black bg-[image:var(--weather-bg-img)] bg-center bg-cover bg-opacity-30 min-w-[1400px] max-w-[1400px] min-h-[600px] rounded-3xl shadow-lg shadow-black px-9 py-12 bg-blend-overlay flex justify-center items-center relative overflow-hidden transition-all duration-700"
+                className="bg-black bg-[image:var(--weather-bg-img)] bg-center bg-cover bg-opacity-30 min-w-[1400px] max-w-[1400px] min-h-[600px] rounded-3xl shadow-lg shadow-black px-9 py-12 bg-blend-overlay flex justify-center items-center relative overflow-hidden transition-all duration-700 delay-700"
                 style={{ "--weather-bg-img": `url(${weatherBg})` }}
                 ref={this.dashboardRef}>
                 <div className="grid grid-cols-5 gap-9 w-full h-full">
@@ -105,8 +114,11 @@ class DashboardView extends Component {
                         <LeftSideBar />
                         <MainContent />
                     </WeatherContext.Provider>
+                    <span className="text-slate-300 absolute bottom-0 right-0 pr-5 pb-2 pl-2 pt-1 rounded-sm text-sm bg-black bg-opacity-50">
+                        Last Updated at: {this.state.updatedAt ?? "never"}
+                    </span>
                 </div>
-                {Object.keys(data).length || <LoadingIcon />}
+                {/* {Object.keys(data).length || <LoadingIcon />} */}
             </main>
         );
     }

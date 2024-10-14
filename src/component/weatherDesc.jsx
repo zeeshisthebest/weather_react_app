@@ -4,7 +4,6 @@ import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
 import OtherLocationCard from "./otherLocationCard";
 
 const WeatherDecription = ({ condition }) => {
-
     return (
         <div className="row-span-2 flex flex-nowrap">
             <div className="w-8/12 text-6xl flex flex-row justify-start align-middle items-center font-sans font-medium">
@@ -24,12 +23,22 @@ const WeatherDecription = ({ condition }) => {
                     </a>
                 </div>
                 <div className="flex flex-nowrap gap-4 justify-between">
-                    <OtherLocationCard loc="Liverpool" temp={17} weather="Thunderstorms" icon="thunderstorm" />
-                    <OtherLocationCard loc="Palermo" temp={9} weather="Cloudy with Sun" icon="snow_sun" />
+                    <OtherLocationCard
+                        loc="Liverpool"
+                        temp={17}
+                        weather="Thunderstorms"
+                        icon="thunderstorm"
+                    />
+                    <OtherLocationCard
+                        loc="Palermo"
+                        temp={9}
+                        weather="Cloudy with Sun"
+                        icon="snow_sun"
+                    />
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default WeatherDecription;

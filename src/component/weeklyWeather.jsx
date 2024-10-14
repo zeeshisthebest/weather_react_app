@@ -13,7 +13,7 @@ class WeeklyWeather extends Component {
     state = {
         weekDays: [],
         weeklyWeather: [],
-        dataForDisplay: [],
+        dataForDisplay: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     };
 
     static contextType = WeatherContext;

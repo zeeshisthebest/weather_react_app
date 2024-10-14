@@ -5,8 +5,8 @@ import React from "react";
 const WeeklyWeatherGraph = ({ data: weeklyWeather, currentDay }) => {
 
 
-    const low = weeklyWeather && Math.min(...weeklyWeather);
-    const high = weeklyWeather && Math.max(...weeklyWeather);
+    const low = weeklyWeather.length === 0 ? 0 : Math.min(...weeklyWeather);
+    const high = weeklyWeather.length === 0 ? 0 : Math.max(...weeklyWeather);
     let avg = (low + high) / 2;
 
     return (
