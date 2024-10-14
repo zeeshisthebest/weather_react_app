@@ -294,15 +294,19 @@ let codes = {
 /**
  *
  * @param {number} code Weather Code
- * @returns The path to the bgImage
+ * @returns The path to the bgImage, defaults to sunny
  */
 export function getWeatherBg (code) {
+  if(!code) return weatherIcons.wBg["sunny"]
   return weatherIcons.wBg[codes[`C${code}`].bgDay];
 }
 
 /**
  *
  * @param {number} code  Weather Code
- * @returns The path to the Icon
+ * @returns The path to the Icon, if the code is null it returns Sunny Icon
  */
-export function getWeatherIcons (code) { }
+export function getWeatherIcons (code) {
+  if(!code) return weatherIcons.wIc["sunny"]
+  return weatherIcons.wIc[codes[`C${code}`].iconDay];
+ }

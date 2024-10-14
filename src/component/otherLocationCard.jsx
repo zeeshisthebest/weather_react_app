@@ -2,6 +2,8 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import currentWeatherService from "../services/currentWeatherService";
 import { toast } from "react-toastify";
 import { UseMetricsContext } from "../contexts/contexts";
+import logService from "../services/logService";
+import { getWeatherIcons } from "../data/weatherCodes";
 
 const OtherLocationCard = ({ loc, icon }) => {
 
@@ -13,10 +15,11 @@ const OtherLocationCard = ({ loc, icon }) => {
         try {
             let resp = await currentWeatherService.getCurrentWeather(loc);
             let mdl = currentWeatherService.mapToRecentModel(resp.data);
+            console.log(mdl)
             setWeather(mdl);
         } catch (error) {
-            console.log(error);
-            toast.error("Unable to load Recent");
+            logService.log(error);
+            toast.error("Unable to load recent weathers");
         }
     }, [loc]);
 
@@ -32,7 +35,7 @@ const OtherLocationCard = ({ loc, icon }) => {
         <div className="bg-black bg-opacity-30 border border-gray-600 w-full h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200  select-none">
             <div className="col-span-1">
                 <img
-                    src={`assets/weather_icons/${icon}.png`}
+                    src={getWeatherIcons(wthr.code)}
                     className="w-full h-full object-contain"
                     alt=""
                 />

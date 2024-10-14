@@ -5,6 +5,14 @@ import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldHigh";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
 
+
+
+/**
+ *
+ * @param {string} placeName Name for the label
+ * @param {object} coordiantes The object containing latitude and longitude
+ * @returns
+ */
 const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
     useEffect(() => {
         // Create root element
@@ -92,7 +100,7 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
         return () => {
             root.dispose();
         };
-    }, [latitude, longitude]);
+    }, [latitude, longitude, placeName]);
 
     return (
         <div className="w-full">

@@ -77,7 +77,6 @@ class DashboardView extends Component {
      * @param {string} imgPath Type of image based on the weather condition
      */
     setBackground = (imgPath) => {
-
         this.dashboardRef.current.style.setProperty("--weather-bg-img", `url(${imgPath})`);
     };
 
