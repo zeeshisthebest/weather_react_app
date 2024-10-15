@@ -294,11 +294,13 @@ let codes = {
 /**
  *
  * @param {number} code Weather Code
+ * @param {bool} isSunUp Either is the day or the night
  * @returns The path to the bgImage, defaults to sunny
  */
-export function getWeatherBg (code) {
+export function getWeatherBg (code, isSunUp) {
   if(!code) return weatherIcons.wBg["sunny"]
-  return weatherIcons.wBg[codes[`C${code}`].bgDay];
+  let cond = isSunUp ? codes[`C${code}`].bgDay : codes[`C${code}`].bgNight;
+  return weatherIcons.wBg[cond];
 }
 
 /**
@@ -306,7 +308,8 @@ export function getWeatherBg (code) {
  * @param {number} code  Weather Code
  * @returns The path to the Icon, if the code is null it returns Sunny Icon
  */
-export function getWeatherIcons (code) {
+export function getWeatherIcons (code, isSunUp) {
   if(!code) return weatherIcons.wIc["sunny"]
-  return weatherIcons.wIc[codes[`C${code}`].iconDay];
+  let cond = isSunUp ? codes[`C${code}`].iconDay : codes[`C${code}`].iconNight;
+  return weatherIcons.wIc[cond];
  }

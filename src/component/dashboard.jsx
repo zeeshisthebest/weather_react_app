@@ -19,7 +19,7 @@ class DashboardView extends Component {
     };
 
     dashboardRef = React.createRef();
-
+    refreshTimer = null;
     /**
      * Sets the location into the state either from local storage / IP
      *
@@ -61,7 +61,7 @@ class DashboardView extends Component {
                 data: weatherData,
                 updatedAt: this.getLastUpdate(),
             });
-            this.setBackground(getWeatherBg(weatherData.weather.code));
+            this.setBackground(getWeatherBg(weatherData.weather.code, weatherData.astro.sunUp));
         } catch (error) {
             console.log(error);
             toast.error("Error: Couldn't get weather info");
@@ -107,6 +107,17 @@ class DashboardView extends Component {
             }, 1500);
             ++retries;
         }
+    }
+
+    componentWillUnmount(){
+        clearTimeout(this.refreshTimer);
+    }
+
+    // Refreshes the app after a time
+    refreshApp = ()=>{
+        this.refreshTimer = setTimeout(() => {
+            this.getWeather();
+        }, 1000 * 15);
     }
 
     render () {

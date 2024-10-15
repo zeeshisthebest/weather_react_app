@@ -31,19 +31,21 @@ function mapWeatherToModel(weatherData, astroData){
         location: weatherData.location,
         astro: {
             sunrise: astroData.astronomy.astro.sunrise,
-            sunset: astroData.astronomy.astro.sunset
+            sunset: astroData.astronomy.astro.sunset,
+            sunUp: astroData.astronomy.astro.is_sun_up
         }
     }
 }
 
-function mapToRecentModel(weather){
+function mapToRecentModel(weather, astro){
     return {
         condition: weather.current.condition.text,
         code: weather.current.condition.code,
         tempC: weather.current.temp_c,
         tempF: weather.current.temp_f,
         name: weather.location.name,
-        country: weather.location.country
+        country: weather.location.country,
+        isSun: astro.astronomy.astro.is_sun_up
     }
 }
 

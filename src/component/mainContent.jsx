@@ -44,6 +44,7 @@ class MainContent extends Component {
                         visibility={useMetric ? weather?.visKm ?? 0 : weather?.visMi ?? 0}
                         feelsLike={useMetric ? weather?.feelC ?? 0 : weather?.feelF ?? 0}
                         humidity={weather?.humidity ?? 0}
+                        localTime={location?.localtime ?? ""}
                     />
                     <Temprature tempC={weather?.tempC ?? 0} tempF={weather?.tempF ?? 0} />
                     <WeatherDecription condition={weather?.condition ?? ""} />

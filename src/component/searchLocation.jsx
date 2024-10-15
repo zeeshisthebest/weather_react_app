@@ -1,12 +1,21 @@
-import React, { forwardRef, useContext, useState } from "react";
+import React, { forwardRef, useContext, useRef, useState } from "react";
 import { WeatherContext } from "../contexts/contexts";
 import utils from "./utils/utils";
 import { search } from "../services/searchLocationService";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SearchLocation = forwardRef(function SearchLocation (props, ref) {
+const SearchLocation = (props) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const wthrCtxt = useContext(WeatherContext);
+    let searchRef = useRef(null);
+
+    // Focuses the input field <SearchLocation/>
+    let handleSearchClick = () => {
+        let inp = searchRef.current;
+        inp.focus();
+    };
 
     // Callback function for debounce
     let fetchResults = async (query) => {
@@ -34,11 +43,8 @@ const SearchLocation = forwardRef(function SearchLocation (props, ref) {
     };
 
     return (
-        <>
-            <div
-                className="relative inline-block w-0 transition-all duration-700 focus-within:w-[150px]"
-            // ref={ref}
-            >
+        <div className="inline-block rounded-full border border-gray-400 px-2 py-1">
+            <div className="relative inline-block w-0 transition-all duration-700 focus-within:w-[150px]">
                 <input
                     className="transition-all duration-500 focus:border-0 focus:w-[150px] outline-none caret-slate-200 leading-3 text-sm w-full bg-transparent"
                     type="text"
@@ -47,7 +53,7 @@ const SearchLocation = forwardRef(function SearchLocation (props, ref) {
                     onChange={handleChange}
                     name="location_input"
                     placeholder="Search..."
-                    ref={ref}
+                    ref={searchRef}
                 />
                 <ul className="bg-black bg-opacity-60 rounded-br-md rounded-bl-md overflow-hidden w-full absolute">
                     {searchResult.map((opt) => (
@@ -61,8 +67,11 @@ const SearchLocation = forwardRef(function SearchLocation (props, ref) {
                     ))}
                 </ul>
             </div>
-        </>
+            <button className="" onClick={handleSearchClick}>
+                <FontAwesomeIcon icon={faSearch} style={{ color: "#ccc" }} />
+            </button>
+        </div>
     );
-});
+};
 
 export default SearchLocation;

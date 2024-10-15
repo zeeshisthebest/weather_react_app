@@ -16,7 +16,7 @@ function getLocation() {
  *
  * @returns The list of recent searches, max 10
  */
-function getRecentSearched() {
+function getRecentSearched()  {
   let recentItems =  localStorage.getItem(recent);
   return recentItems ?  JSON.parse(recentItems) : null;
 }
