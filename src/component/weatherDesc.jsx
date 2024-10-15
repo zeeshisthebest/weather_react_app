@@ -13,7 +13,7 @@ const WeatherDecription = ({ condition }) => {
             </div>
             <div className="w-4/12 flex flex-col justify-center gap-2">
                 <div className="flex flex-nowrap justify-between text-sm">
-                    <p className="text-slate-500">Recently Searched</p>
+                    <p className="text-slate-400">Recently Searched</p>
                     <a href="/" className="text-gray-300 hover:text-blue-300">
                         See all &nbsp;
                         <FontAwesomeIcon
@@ -35,6 +35,9 @@ const WeatherDecription = ({ condition }) => {
                         weather="Cloudy with Sun"
                         icon="snow_sun"
                     />
+                    {/* <h2 className="text-gray-300 text-center text-2xl">
+                        No Recent Searched
+                    </h2> */}
                 </div>
             </div>
         </div>

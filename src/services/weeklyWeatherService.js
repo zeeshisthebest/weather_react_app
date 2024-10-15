@@ -5,7 +5,7 @@ const apiEndPoint = configs.apiUrl + "/forecast.json";
 
 function getWeeklyWeather (location) {
 
-    if(!location) throw new Error("Location not provided");
+    if(!location) return null;;
 
     return httpService.get(apiEndPoint, {
         params: {

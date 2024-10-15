@@ -14,6 +14,7 @@ class WeeklyWeather extends Component {
         weekDays: [],
         weeklyWeather: [],
         dataForDisplay: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        location:""
     };
 
     static contextType = WeatherContext;
@@ -22,15 +23,18 @@ class WeeklyWeather extends Component {
 
     populateWeather = async () => {
         try {
-            let resp = await getWeeklyWeather("karachi");
+
+            let resp = await getWeeklyWeather(this.context.data?.location?.name ?? "");
+            if(!resp) return;
             let wthr = mapWeeklyWeatherToModel(resp.data.forecast.forecastday);
             this.setState({
                 weeklyWeather: wthr,
+                location: this.context.data?.location?.name ?? ""
             });
             this.populateArray();
             this.context.setMinMax(wthr[0]);
         } catch (error) {
-            toast.error("Error! Failed to get weekly Weather Updates");
+            toast.error("Couldn't get weekly Weather Updates");
         }
     };
 
@@ -51,17 +55,17 @@ class WeeklyWeather extends Component {
     };
 
     componentDidMount () {
-        this.populateWeather();
+        this.populateWeather();;
         let weekDays = getWeekDays(this.indexForToday);
         this.setState({ weekDays });
     }
 
-    componentDidUpdate (prevProps) {
+    componentDidUpdate (prevProps, prevState) {
         if (prevProps.useMetric !== this.props.useMetric) {
             this.populateArray();
         }
 
-        if (prevProps.location !== this.props.location) {
+        if(this.context.data?.location?.name !== prevState.location){
             this.populateWeather();
         }
     }
