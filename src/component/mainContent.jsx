@@ -39,15 +39,16 @@ class MainContent extends Component {
                 }}>
                 <div className="col-span-4 grid grid-rows-6 w-full h-full">
                     <LocationAndInfo
-                        location={`${location?.name ?? ""}, ${location?.region ?? ""}, ${location?.country ?? ""}`}
+                        location={`${location?.name ?? ""}${location?.region ? ", "+location?.region : ""}, ${location?.country ?? ""}`}
                         isMetric={useMetric}
                         visibility={useMetric ? weather?.visKm ?? 0 : weather?.visMi ?? 0}
                         feelsLike={useMetric ? weather?.feelC ?? 0 : weather?.feelF ?? 0}
                         humidity={weather?.humidity ?? 0}
+                        localTime={location?.localtime ?? ""}
                     />
                     <Temprature tempC={weather?.tempC ?? 0} tempF={weather?.tempF ?? 0} />
                     <WeatherDecription condition={weather?.condition ?? ""} />
-                    <WeeklyWeather location={location?.name ?? ""} useMetric={this.state.useMetric} />
+                    <WeeklyWeather useMetric={this.state.useMetric} />
                 </div>
             </UseMetricsContext.Provider>
         );

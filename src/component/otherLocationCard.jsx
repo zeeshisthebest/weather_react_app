@@ -7,7 +7,7 @@ import { getWeatherIcons } from "../data/weatherCodes";
 
 import SkeletonOtherLocationCard from "./widgets/skeletonOtherLocationCard";
 
-const OtherLocationCard = ({ loc, icon }) => {
+const OtherLocationCard = ({ loc }) => {
     const [wthr, setWeatherState] = useState(null);
     const metricCtxt = useContext(UseMetricsContext);
 
@@ -15,7 +15,8 @@ const OtherLocationCard = ({ loc, icon }) => {
     const getWeather = useCallback(async () => {
         try {
             let resp = await currentWeatherService.getCurrentWeather(loc);
-            let mdl = currentWeatherService.mapToRecentModel(resp.data);
+            let astro = await currentWeatherService.getAstroData(loc);
+            let mdl = currentWeatherService.mapToRecentModel(resp.data, astro.data);
             setWeatherState(mdl);
         } catch (error) {
             logService.log(error);
@@ -30,10 +31,10 @@ const OtherLocationCard = ({ loc, icon }) => {
     }, [getWeather]);
 
     return wthr ? (
-        <div className="bg-black bg-opacity-30 border border-gray-600 w-full h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200  select-none">
+        <div className="bg-black bg-opacity-30 border border-gray-600 w-1/2 h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200  select-none">
             <div className="col-span-1">
                 <img
-                    src={getWeatherIcons(wthr.code)}
+                    src={getWeatherIcons(wthr.code, wthr.isSun)}
                     className="w-full h-full object-contain"
                     alt=""
                 />
@@ -47,7 +48,6 @@ const OtherLocationCard = ({ loc, icon }) => {
                 <p className="font-semibold text-lg overflow-hidden whitespace-nowrap text-ellipsis">
                     {`${wthr.name}, ${wthr.country}`}
                 </p>
-
                 <p className="font-light text-sm text-gray-400">
                     {wthr.condition}
                 </p>

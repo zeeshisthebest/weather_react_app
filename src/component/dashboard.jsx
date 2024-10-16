@@ -12,28 +12,27 @@ import { getWeatherBg } from "../data/weatherCodes";
 
 class DashboardView extends Component {
     state = {
-        weatherBg: weatherIcons.wBg.lightSnowNight,
+        weatherBg: weatherIcons.wBg.sunnyDay,
         data: {},
         minMax: {},
         updatedAt: null,
     };
 
     dashboardRef = React.createRef();
-
+    refreshTimer = null;
     /**
      * Sets the location into the state either from local storage / IP
      *
      * @returns none
      */
-    setLocation = async () => {
-        let loc = storageService.getLocation();
+    setLocation = async (searchedLocation) => {
+        let loc = searchedLocation || storageService.getLocation();
         if (!loc) {
-            console.log("No location found");
             try {
-                let locFromIp = await getLocationFromIp();
-                loc = locFromIp.city;
-                storageService.setLocation(loc);
-                toast.success("IP Location: " + loc);
+                    let locFromIp = await getLocationFromIp();
+                    loc = locFromIp.city;
+                    toast.success("IP Location: " + loc);
+
             } catch (error) {
                 loc = "London"; // defualting
                 toast.error("Couldn't fetch location from IP, set to default: London");
@@ -41,6 +40,7 @@ class DashboardView extends Component {
         } else {
             console.log("Location found in local: " + loc);
         }
+        storageService.setLocation(loc);
         return loc;
     };
 
@@ -48,8 +48,8 @@ class DashboardView extends Component {
      *
      * First it finds the location and after it calls API to fetch weather
      */
-    getWeather = async () => {
-        const location = await this.setLocation();
+    getWeather = async (loc) => {
+        const location = await this.setLocation(loc);
         try {
             let weather = await weatherService.getCurrentWeather(location);
             let astro = await weatherService.getAstroData(location);
@@ -59,12 +59,9 @@ class DashboardView extends Component {
             );
             this.setState({
                 data: weatherData,
-                updatedAt: new Date().toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
+                updatedAt: this.getLastUpdate(),
             });
-            this.setBackground(getWeatherBg(weatherData.weather.code));
+            this.setBackground(getWeatherBg(weatherData.weather.code, weatherData.astro.sunUp));
         } catch (error) {
             console.log(error);
             toast.error("Error: Couldn't get weather info");
@@ -90,6 +87,18 @@ class DashboardView extends Component {
         );
     };
 
+    // Generates the string with time, day and date
+    getLastUpdate = () => {
+        const dateObj = new Date();
+        let dateString = dateObj.toDateString().split(" ");
+        let date = `( ${dateString[0]} - ${dateString[1]} ${dateString[2]}, ${dateString[3]} )`;
+        let time = dateObj.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        return `${time} ${date}`;
+    };
+
     componentDidMount () {
         let retries = 0;
         while (!Object.keys(this.state.data).length && retries <= 3) {
@@ -98,6 +107,17 @@ class DashboardView extends Component {
             }, 1500);
             ++retries;
         }
+    }
+
+    componentWillUnmount(){
+        clearTimeout(this.refreshTimer);
+    }
+
+    // Refreshes the app after a time
+    refreshApp = ()=>{
+        this.refreshTimer = setTimeout(() => {
+            this.getWeather();
+        }, 1000 * 15);
     }
 
     render () {
@@ -110,15 +130,20 @@ class DashboardView extends Component {
                 ref={this.dashboardRef}>
                 <div className="grid grid-cols-5 gap-9 w-full h-full">
                     <WeatherContext.Provider
-                        value={{ data: data, setMinMax: this.setMinMax, minMax: minMax }}>
+                        value={{
+                            data: data,
+                            setMinMax: this.setMinMax,
+                            minMax: minMax,
+                            updateLoc: this.getWeather,
+                        }}>
                         <LeftSideBar />
                         <MainContent />
                     </WeatherContext.Provider>
-                    <span className="text-slate-300 absolute bottom-0 right-0 pr-5 pb-2 pl-2 pt-1 rounded-sm text-sm bg-black bg-opacity-50">
+                    <span className="text-slate-300 absolute bottom-0 right-0 pr-5 pb-2 pl-2 pt-1 rounded-sm text-xs bg-black bg-opacity-50">
                         Last Updated at: {this.state.updatedAt ?? "never"}
                     </span>
                 </div>
-                {/* {Object.keys(data).length || <LoadingIcon />} */}
+                {Object.keys(data).length || <LoadingIcon />}
             </main>
         );
     }
