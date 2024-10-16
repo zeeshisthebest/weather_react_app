@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { WeatherContext } from "../contexts/contexts";
 import utils from "./utils/utils";
 import { search } from "../services/searchLocationService";

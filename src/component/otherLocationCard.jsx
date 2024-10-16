@@ -7,7 +7,7 @@ import { getWeatherIcons } from "../data/weatherCodes";
 
 import SkeletonOtherLocationCard from "./widgets/skeletonOtherLocationCard";
 
-const OtherLocationCard = ({ loc }) => {
+const OtherLocationCard = ({ loc, onClick }) => {
     const [wthr, setWeatherState] = useState(null);
     const metricCtxt = useContext(UseMetricsContext);
 
@@ -31,7 +31,7 @@ const OtherLocationCard = ({ loc }) => {
     }, [getWeather]);
 
     return wthr ? (
-        <div className="bg-black bg-opacity-30 border border-gray-600 w-1/2 h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200  select-none">
+        <div className="bg-black bg-opacity-30 border border-gray-600 w-1/2 h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200 select-none cursor-pointer" onClick={onClick}>
             <div className="col-span-1">
                 <img
                     src={getWeatherIcons(wthr.code, wthr.isSun)}

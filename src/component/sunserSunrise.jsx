@@ -3,26 +3,7 @@ import PropTypes from "prop-types";
 import { FormControlLabel, FormGroup, Typography } from "@mui/material";
 import { SwitchAirbnb } from "./utils/switchStyle.ts";
 import localStorageService from "../services/localStorageService.js";
-
-/**
- *
- * @param {string} time Should be in the format "hh:mm [AM|PM]"
- * @returns Time in 24 hr format
- */
-
-const to24 = (time) => {
-    let [time2, amPm] = time.split(" ");
-    //Before the data is loaded
-    if (!amPm) return time;
-
-    let [hr, min] = time2.split(':');
-    if (amPm.toLowerCase() === 'pm') {
-        return hr === "12" ? time2 : `${parseInt(hr) + 12}:${min}`;
-    } else {
-        return hr === '12' ? `00:${min}` : time2;
-    }
-
-}
+import utils from "./utils/utils.js";
 
 
 const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
@@ -68,7 +49,7 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
                 />
                 <p className="text-center text-gray-400 text-sm">Sunrise</p>
                 <p className="text-gray-200 text-center font-bold text-md">
-                    {is24 ? to24(sunriseTime) : sunriseTime}
+                    {is24 ? utils.to24(sunriseTime) : sunriseTime}
 
                 </p>
             </div>
@@ -80,7 +61,7 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
                 />
                 <p className="text-center text-gray-400 text-sm">Sunset</p>
                 <p className="text-gray-200 text-center font-bold text-md">
-                    {is24 ? to24(sunsetTime) : sunsetTime}
+                    {is24 ? utils.to24(sunsetTime) : sunsetTime}
 
                 </p>
             </div>

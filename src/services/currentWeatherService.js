@@ -1,5 +1,6 @@
 import http from "./httpService";
 import configs from "../config.json";
+import utils from "../component/utils/utils";
 
 const apiEndPointWeather = configs.apiUrl + "/current.json";
 const apiEndPointAstro = configs.apiUrl + "/astronomy.json";
@@ -7,37 +8,41 @@ const apiEndPointAstro = configs.apiUrl + "/astronomy.json";
 
 /**
  *
- * @param {object} weatherData Weather Object returned from /current.json
- * @param {object} astroData Astro Object returned from /astronomy.json
+ * @param {object} current current weather from weatherCurrent Object
+ * @param {object} location location from weatherCurrent Object
+ * @param {object} astro Astro Object returned from /astronomy.json
  * @returns The data object for state
  */
-function mapWeatherToModel(weatherData, astroData){
+function mapWeatherToModel({current, location}, {astronomy: {astro}}){
+    let currTime = location.localtime.split(" ");
+
    return {
         weather: {
-            condition:  weatherData.current.condition.text,
-            code:  weatherData.current.condition.code,
-            tempC: weatherData.current.temp_c,
-            tempF: weatherData.current.temp_f,
-            humidity: weatherData.current.humidity,
-            feelC: weatherData.current.feelslike_c,
-            feelF: weatherData.current.feelslike_f,
-            uv: weatherData.current.uv,
-            visKm: weatherData.current.vis_km,
-            visMi: weatherData.current.vis_miles,
-            windKph: weatherData.current.wind_kph,
-            windMph: weatherData.current.wind_mph
+            uv: current.uv,
+            code:  current.condition.code,
+            tempC: current.temp_c,
+            tempF: current.temp_f,
+            feelC: current.feelslike_c,
+            feelF: current.feelslike_f,
+            visKm: current.vis_km,
+            visMi: current.vis_miles,
+            windKph: current.wind_kph,
+            windMph: current.wind_mph,
+            humidity: current.humidity,
+            condition:  current.condition.text
         },
-        airQuality: weatherData.current.air_quality,
-        location: weatherData.location,
+        airQuality: current.air_quality,
+        location: location,
         astro: {
-            sunrise: astroData.astronomy.astro.sunrise,
-            sunset: astroData.astronomy.astro.sunset,
-            sunUp: astroData.astronomy.astro.is_sun_up
+            sunrise: astro.sunrise,
+            sunset: astro.sunset,
+            sunUp: currTime[1] > utils.to24(astro.sunrise) && currTime[1] < utils.to24(astro.sunset)
         }
     }
 }
 
-function mapToRecentModel(weather, astro){
+function mapToRecentModel(weather, {astronomy: {astro}}){
+    let currTime = weather.location.localtime.split(" ");
     return {
         condition: weather.current.condition.text,
         code: weather.current.condition.code,
@@ -45,7 +50,7 @@ function mapToRecentModel(weather, astro){
         tempF: weather.current.temp_f,
         name: weather.location.name,
         country: weather.location.country,
-        isSun: astro.astronomy.astro.is_sun_up
+        isSun: currTime[1] > utils.to24(astro.sunrise) && currTime[1] < utils.to24(astro.sunset)
     }
 }
 

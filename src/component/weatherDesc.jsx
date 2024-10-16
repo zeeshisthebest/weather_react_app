@@ -36,7 +36,7 @@ const WeatherDecription = ({ condition }) => {
                 {/* Cards */}
                 <div className="flex flex-nowrap gap-4 justify-between">
                     {recents.length > 0 ? (
-                        recents.map((rcnt) => <OtherLocationCard loc={rcnt} key={rcnt} />)
+                        recents.map((rcnt) => <OtherLocationCard loc={rcnt} key={rcnt} onClick={() => { wthrCtxt.updateLoc(rcnt) }} />)
                     ) : (
                         <h2 className="text-gray-300 text-center text-2xl">
                             No Recent Searched

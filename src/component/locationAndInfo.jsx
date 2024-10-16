@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InfoCard from "./infoCard";
 import PropTypes from "prop-types";
@@ -28,9 +28,9 @@ const LocationAndInfo = (props) => {
 						<span className="ml-2 font-semibold leading-7">{location}</span>
 					</div>
 					<div>
-						<FontAwesomeIcon icon={faClock} style={{ color: "#bcc" }} size="xs"/>
+						<FontAwesomeIcon icon={faClock} style={{ color: "#bcc" }} size="xs" />
 						<span className="text-sm mx-2">{time[1]}</span>
-						<FontAwesomeIcon icon={faCalendar} style={{ color: "#bcc" }} size="xs"/>
+						<FontAwesomeIcon icon={faCalendar} style={{ color: "#bcc" }} size="xs" />
 						<span className="text-sm ml-2">{time[0]}</span>
 					</div>
 				</div>

@@ -29,9 +29,9 @@ class DashboardView extends Component {
         let loc = searchedLocation || storageService.getLocation();
         if (!loc) {
             try {
-                    let locFromIp = await getLocationFromIp();
-                    loc = locFromIp.city;
-                    toast.success("IP Location: " + loc);
+                let locFromIp = await getLocationFromIp();
+                loc = locFromIp.city;
+                toast.success("IP Location: " + loc);
 
             } catch (error) {
                 loc = "London"; // defualting
@@ -61,6 +61,9 @@ class DashboardView extends Component {
                 data: weatherData,
                 updatedAt: this.getLastUpdate(),
             });
+
+            document.title = weatherData.location.name + " | Weather";
+            //Sets the app background
             this.setBackground(getWeatherBg(weatherData.weather.code, weatherData.astro.sunUp));
         } catch (error) {
             console.log(error);
@@ -104,20 +107,23 @@ class DashboardView extends Component {
         while (!Object.keys(this.state.data).length && retries <= 3) {
             setTimeout(() => {
                 this.getWeather();
+                this.refreshApp();
             }, 1500);
             ++retries;
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount () {
         clearTimeout(this.refreshTimer);
     }
 
-    // Refreshes the app after a time
-    refreshApp = ()=>{
+    // Refreshes the app after a time (defualt to 15)
+    refreshApp = () => {
+        const refreshPeriod = 1000 * 60 * 15; //15 minutes
+        if (this.refreshTimer) clearTimeout(this.refreshTimer);
         this.refreshTimer = setTimeout(() => {
             this.getWeather();
-        }, 1000 * 15);
+        }, refreshPeriod);
     }
 
     render () {
