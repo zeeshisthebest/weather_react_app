@@ -1,7 +1,7 @@
 function init() {}
 
 function log(error) {
-  console.error(error);
+  console.log(error);
 }
 
 const logService = {

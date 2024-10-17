@@ -15,11 +15,13 @@ class DashboardView extends Component {
         weatherBg: weatherIcons.wBg.sunnyDay,
         data: {},
         minMax: {},
+        loading: true,
         updatedAt: null,
     };
 
     dashboardRef = React.createRef();
     refreshTimer = null;
+
     /**
      * Sets the location into the state either from local storage / IP
      *
@@ -49,6 +51,7 @@ class DashboardView extends Component {
      * First it finds the location and after it calls API to fetch weather
      */
     getWeather = async (loc) => {
+
         const location = await this.setLocation(loc);
         try {
             let weather = await weatherService.getCurrentWeather(location);
@@ -69,6 +72,8 @@ class DashboardView extends Component {
             console.log(error);
             toast.error("Error: Couldn't get weather info");
         }
+        this.setState({ loading: false });
+        console.log(this.state.loading);
     };
 
     /**
@@ -149,7 +154,7 @@ class DashboardView extends Component {
                         Last Updated at: {this.state.updatedAt ?? "never"}
                     </span>
                 </div>
-                {Object.keys(data).length || <LoadingIcon />}
+                {!this.loading || Object.keys(data).length || <LoadingIcon />}
             </main>
         );
     }
