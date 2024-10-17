@@ -4,9 +4,11 @@ import httpService from "./httpService";
 const apiEndPoint = configs.apiUrl + "/forecast";
 
 /**
- *
- * @param {string} location Of which weekly weather is needed starting from today
+ * Fetched the weekly weather of the given location starting today
+ * @async
+ * @param {string} location Location
  * @returns A promise that will resolve into object
+ * @throws Error thrown by axios
  */
 function getWeeklyWeather (location) {
     if(!location) return null;
@@ -15,8 +17,12 @@ function getWeeklyWeather (location) {
 
 
 /**
+ * Genarates day of the week dynamically starting from today
  *
- * @returns The array containing days of the week starting from today
+ * @param {number} dayOffset The index of day (sunday=0, saturday=7)
+ * @returns Array containing Long Days starting today
+ * @throws Error from axios
+ *
  */
 function getWeekDays (dayOffset) {
     let today = new Date();

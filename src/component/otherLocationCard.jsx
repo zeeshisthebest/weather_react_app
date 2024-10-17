@@ -4,9 +4,16 @@ import { toast } from "react-toastify";
 import { UseMetricsContext } from "../contexts/contexts";
 import logService from "../services/logService";
 import { getWeatherIcons } from "../data/weatherCodes";
-
 import SkeletonOtherLocationCard from "./widgets/skeletonOtherLocationCard";
+import PropTypes from "prop-types";
 
+/**
+ * Displays the brief weather info for given location
+ *
+ * @param {string} loc The recent location
+ * @param {func} onClick callback function for the click event
+ *
+ */
 const OtherLocationCard = ({ loc, onClick }) => {
     const [wthr, setWeatherState] = useState(null);
     const metricCtxt = useContext(UseMetricsContext);
@@ -31,7 +38,9 @@ const OtherLocationCard = ({ loc, onClick }) => {
     }, [getWeather]);
 
     return wthr ? (
-        <div className="bg-black bg-opacity-30 border border-gray-600 w-1/2 h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200 select-none cursor-pointer" onClick={onClick}>
+        <div
+            className="bg-black bg-opacity-30 border border-gray-600 w-1/2 h-44 rounded-3xl backdrop-blur-sm p-4 box-border grid grid-cols-2 grid-rows-2 gap-y-2 text-gray-200 hover:shadow-md hover:shadow-gray-600 duration-200 select-none cursor-pointer"
+            onClick={onClick}>
             <div className="col-span-1">
                 <img
                     src={getWeatherIcons(wthr.code, wthr.isSun)}
@@ -48,12 +57,16 @@ const OtherLocationCard = ({ loc, onClick }) => {
                 <p className="font-semibold text-lg overflow-hidden whitespace-nowrap text-ellipsis">
                     {`${wthr.name}, ${wthr.country}`}
                 </p>
-                <p className="font-light text-sm text-gray-400">
-                    {wthr.condition}
-                </p>
+                <p className="font-light text-sm text-gray-400">{wthr.condition}</p>
             </div>
         </div>
-    ) : <SkeletonOtherLocationCard />;
+    ) : (
+        <SkeletonOtherLocationCard />
+    );
 };
 
+OtherLocationCard.propTypes = {
+    loc: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+};
 export default OtherLocationCard;

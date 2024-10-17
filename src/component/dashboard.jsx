@@ -10,21 +10,32 @@ import weatherService from "../services/currentWeatherService";
 import { WeatherContext } from "../contexts/contexts";
 import { getWeatherBg } from "../data/weatherCodes";
 
+/**
+ * The main container of the app
+ */
 class DashboardView extends Component {
     state = {
         weatherBg: weatherIcons.wBg.sunnyDay,
         data: {},
         minMax: {},
         updatedAt: null,
+        loading : true
     };
 
+    /**
+     * ref to update the background of the app
+     */
     dashboardRef = React.createRef();
+
+    /**
+     * timer ID for regular interval udpate
+     */
     refreshTimer = null;
 
     /**
      * Sets the location into the state either from local storage / IP
      *
-     * @returns none
+     * @returns location string
      */
     setLocation = async (searchedLocation) => {
         let loc = searchedLocation || storageService.getLocation();
@@ -47,10 +58,11 @@ class DashboardView extends Component {
 
     /**
      *
-     * First it finds the location and after it calls API to fetch weather
+     * First it finds the location then calls API to fetch weather
+     *
+     * @returns none
      */
     getWeather = async (loc) => {
-
         const location = await this.setLocation(loc);
         try {
             let weather = await weatherService.getCurrentWeather(location);
@@ -70,13 +82,11 @@ class DashboardView extends Component {
         } catch (error) {
             console.log(error);
             toast.error("Error: Couldn't get weather info");
-            this.setState({ data: { msg: "Didn't get any data" } });
         }
 
     };
 
     /**
-     *
      * @param {object} minMax The minimum and maximum for today
      */
     setMinMax = (minMax) => {
@@ -84,8 +94,7 @@ class DashboardView extends Component {
     };
 
     /**
-     *
-     * @param {string} imgPath Type of image based on the weather condition
+     * @param {string} imgPath path to the image for background
      */
     setBackground = (imgPath) => {
         this.dashboardRef.current.style.setProperty(
@@ -94,7 +103,9 @@ class DashboardView extends Component {
         );
     };
 
-    // Generates the string with time, day and date
+    /**
+     * @returns The time and date string in the format hh:mm (day | mon dd, yyyy)
+     */
     getLastUpdate = () => {
         const dateObj = new Date();
         let dateString = dateObj.toDateString().split(" ");
@@ -106,14 +117,22 @@ class DashboardView extends Component {
         return `${time} ${date}`;
     };
 
-    componentDidMount () {
+
+    // Start the all data fetching process and retries if failed once
+    initRequest = async ()=>{
         let retries = 0;
-        while (!Object.keys(this.state.data).length && retries <= 3) {
-            setTimeout(() => {
-                this.getWeather();
-            }, 1500);
+
+        while(!Object.keys(this.state.data).length &&  retries <3){
+            this.setState({loading: true})
+            console.log('Getting Data');
+            await this.getWeather();
+            this.setState({loading: false})
+            this.state.data?.weather || await new Promise(resolve=>setTimeout(resolve, 10000));
             ++retries;
         }
+    }
+    componentDidMount () {
+        this.initRequest();
         this.refreshApp();
     }
 
@@ -153,7 +172,7 @@ class DashboardView extends Component {
                         Last Updated at: {this.state.updatedAt ?? "never"}
                     </span>
                 </div>
-                {Object.keys(data).length || <LoadingIcon />}
+                {this.state.loading && <LoadingIcon />}
             </main>
         );
     }

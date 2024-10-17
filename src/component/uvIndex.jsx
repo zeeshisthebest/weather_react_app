@@ -16,6 +16,11 @@ const guageOptions = {
     needleColor: "#BBB",
 };
 
+/**
+ * Dial Guage for displaying current UV index on the scale 1-15
+ *
+ * @param {number} props.uvIndex A number between 1 and 15
+ */
 const UvIndex = ({ uvIndex }) => {
     const uvPercentage = uvIndex / 15;
     return (
@@ -29,7 +34,6 @@ const UvIndex = ({ uvIndex }) => {
                         <sup className="text-xs font-semibold">uv</sup>
                     </p>
                 }
-
             />
             <div className="mx-8 text-slate-300 text-base text-center flex justify-between">
                 <span>0</span>

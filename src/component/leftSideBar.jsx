@@ -6,6 +6,10 @@ import WindAndAirIndex from "./windAndAirIndex";
 import { WeatherContext } from "../contexts/contexts";
 import { getAQI } from "../utils/airQualityData";
 
+/**
+ *  Sidebar for the dashboard containing Globe, Sunrise&Sunset, UV index and wind + air index
+ *
+ */
 class LeftSideBar extends Component {
     static contextType = WeatherContext;
 

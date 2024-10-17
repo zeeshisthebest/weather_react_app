@@ -4,6 +4,13 @@ import PropTypes from "prop-types";
 import HiLow from "./hiLow";
 import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
 
+/**
+ * Displays Current weather, buttons to switch from celcius to Farenheit and vice versa,
+ * Hi and Low temps
+ *
+ * @param {number} props.tempC Temparature in Celcius
+ * @param {number} props.tempF Temparature in Farenheit
+ */
 const Temprature = (props) => {
 
     const metricCtxt = useContext(UseMetricsContext);
@@ -18,7 +25,6 @@ const Temprature = (props) => {
      * @param {bool} val sets the unit to be metric or not
      */
     const handleUnitSelect = (val) => {
-
         metricCtxt.onChange(val);
     };
 

@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+/**
+ * Component to show High and Low temperature for the day
+ */
 const HiLow = ({ hiTemp, lowTemp }) => {
     return (
         <>
@@ -17,7 +20,13 @@ const HiLow = ({ hiTemp, lowTemp }) => {
 };
 
 HiLow.propTypes = {
+    /**
+     * Highest Temparature of the day
+     */
     hiTemp: PropTypes.number.isRequired,
+    /**
+     * Lowest Temparature of the day
+     */
     lowTemp: PropTypes.number.isRequired,
 };
 

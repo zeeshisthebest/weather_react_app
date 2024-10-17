@@ -1,7 +1,12 @@
 import React from "react";
 import AirQualityGraph from "./AirQualityGraph";
-import PropTypes from "prop-types";
 
+
+/**
+ *
+ * @param {number} qlty The AQI index of air
+ * @returns A string corresponing to the given AQI
+ */
 const getAirQualityRemark = (qlty) => {
     if (qlty <= 50) {
         return "Very good";
@@ -18,6 +23,11 @@ const getAirQualityRemark = (qlty) => {
     }
 };
 
+/**
+ *
+ * @param {number} airQuality AQI index, should be withing the range 0 - 500
+ * @returns
+ */
 const AirQuality = ({ airQuality }) => {
     return (
         <div className=" bg-gray-300 bg-opacity-10 py-2 px-2 rounded-md  mt-3 backdrop-blur-sm">
@@ -28,15 +38,39 @@ const AirQuality = ({ airQuality }) => {
                     alt=""
                 />
                 <span>Air</span>
-                <p className="w-full text-right text-sm text-gray-100 leading-4">{getAirQualityRemark(airQuality)}</p>
+                <p className="w-full text-right text-sm text-gray-100 leading-4">
+                    {getAirQualityRemark(airQuality)}
+                </p>
             </div>
             <AirQualityGraph airQuality={airQuality} />
         </div>
     );
 };
 
+/**
+ * Custom Validator for proptype
+ */
+function withinRange (props, propName, componentName) {
+    componentName = componentName || "ANONYMOUS";
+
+    if (props[propName]) {
+        let value = props[propName];
+        if (typeof value === "number") {
+            return value >= 0 && value <= 500
+                ? null
+                : new Error(propName + " in " + componentName + " is not within range");
+        }
+    }
+
+    // assume all ok
+    return null;
+}
+
 AirQuality.propTypes = {
-    airQuality: PropTypes.number.isRequired,
+    /**
+     * AQI withing range 0-500
+     */
+    airQuality: withinRange,
 };
 
 export default AirQuality;

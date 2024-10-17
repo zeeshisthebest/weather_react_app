@@ -7,6 +7,10 @@ import {
     markElementClasses,
 } from "@mui/x-charts/LineChart";
 
+
+/**
+ *  Options and configuration for the line Chart
+ */
 const lineChartOptions = {
     sx: {
         [`& .${lineElementClasses.root}`]: {
@@ -59,7 +63,11 @@ const lineChartOptions = {
     tooltip: { trigger: "none" }
 }
 
+/**
+ * The Linechart graph for AQI with range 0-500
+ */
 const AirQualityGraph = (props) => {
+
     return (
         <LineChart {...lineChartOptions} series={[
             {
@@ -92,6 +100,9 @@ const AirQualityGraph = (props) => {
 };
 
 AirQualityGraph.propTypes = {
+    /**
+     * AQI withing range 0-500
+     */
     airQuality: PropTypes.number.isRequired,
 };
 

@@ -5,19 +5,22 @@ import { search } from "../services/searchLocationService";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SearchLocation = (props) => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchResult, setSearchResult] = useState([]);
-    const wthrCtxt = useContext(WeatherContext);
-    let searchRef = useRef(null);
 
-    // Focuses the input field <SearchLocation/>
+/**
+ * A button that expands on click and displays input field for searching
+ */
+const SearchLocation = () => {
+    const [searchQuery, setSearchQuery] = useState(""); //User input query
+    const [searchResult, setSearchResult] = useState([]); // Results gotten from server
+    const wthrCtxt = useContext(WeatherContext);
+    let searchRef = useRef(null); // For focusing the input field
+
+    // Focuses the input field
     let handleSearchClick = () => {
-        let inp = searchRef.current;
-        inp.focus();
+        searchRef.current.focus();
     };
 
-    // Callback function for debounce
+    // Callback function for debounce that populates the result
     let fetchResults = async (query) => {
         let data = await search(query);
         if (data) {
@@ -25,17 +28,19 @@ const SearchLocation = (props) => {
         }
     };
 
-    // Searches user input location with the delay of 1000
+    // Searches debounce
     let searchFunction = utils.debounce(fetchResults, 600);
 
+    // Callback function for onChange of input field
     let handleChange = ({ target: input }) => {
-        setSearchQuery(input.value);
-        searchFunction(input.value);
+        setSearchQuery(input.value); // Controlled
+        searchFunction(input.value); // Ajax request
     };
 
     /**
-     * Updates the locations
-     * @param {string} loc The location chosen by user from the drop down menu
+     * Triggers the function for retrieving data for selected location
+     *
+     * @param {string} loc Location selected by user
      */
     const onLocationSelect = (loc) => {
         setSearchResult([]);

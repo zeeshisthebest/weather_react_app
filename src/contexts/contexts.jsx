@@ -1,5 +1,11 @@
 import { createContext } from 'react';
 
-// Create the context
+/**
+ * Context for handling all Weather related data
+ */
 export const WeatherContext = createContext({});
+
+/**
+ * Context for handling Metric Preference
+ */
 export const UseMetricsContext = createContext(true);

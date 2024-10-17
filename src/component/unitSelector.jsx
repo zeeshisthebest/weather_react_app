@@ -2,9 +2,9 @@ import React from "react";
 
 /**
  *
- * @param {string} unit unit to be displayed
- * @param {bool} isSlctd if it is selected then it will be rendered bold and slight blue
- * @param {func} onUnitSelect
+ * @param {string} unit Unit to be displayed
+ * @param {bool} isSlctd If it is selected
+ * @param {func} onUnitSelect Callback function to change the unit
  * @returns
  */
 const getUnit = (unit, isSlctd, onUnitSelect) => {
@@ -22,9 +22,11 @@ const getUnit = (unit, isSlctd, onUnitSelect) => {
 };
 
 /**
+ * Shows selected unit and gives the ability to change it
  *
- * @param {*} param0
- * @returns
+ * @param {bool} props.isMetric If metric is selected
+ * @param {func} onUnitSelect Callback function to update the state in parent
+ *
  */
 const UnitSelector = ({ isMetric, onUnitSelect }) => {
     return (

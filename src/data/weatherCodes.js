@@ -1,5 +1,8 @@
 import weatherIcons from "../utils/weatherIcons";
 
+/**
+ * Mapping of icons and background images for the weathe codes
+ */
 let codes = {
   C1000: {
     bgDay: "sunnyDay",
@@ -292,10 +295,11 @@ let codes = {
 };
 
 /**
+ * Gets the background image for the given weather code, defualts to sunny
  *
  * @param {number} code Weather Code
- * @param {bool} isSunUp Either is the day or the night
- * @returns The path to the bgImage, defaults to sunny
+ * @param {bool} isSunUp is sun visible
+ * @returns The path to image
  */
 export function getWeatherBg (code, isSunUp) {
   if(!code) return weatherIcons.wBg["sunny"]
@@ -304,9 +308,11 @@ export function getWeatherBg (code, isSunUp) {
 }
 
 /**
+ * Gets the Icon for the given weather code, defualts to sunny
  *
- * @param {number} code  Weather Code
- * @returns The path to the Icon, if the code is null it returns Sunny Icon
+ * @param {number} code Weather Code
+ * @param {bool} isSunUp is sun visible
+ * @returns The path to icon
  */
 export function getWeatherIcons (code, isSunUp) {
   if(!code) return weatherIcons.wIc["sunny"]

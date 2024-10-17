@@ -5,6 +5,11 @@ import OtherLocationCard from "./otherLocationCard";
 import localStorageService from "../services/localStorageService";
 import { WeatherContext } from "../contexts/contexts";
 
+/**
+ * Displays current condition and Recently searched locations (max 2)
+ *
+ * @param {string} props.condition Current condition of the weather
+ */
 const WeatherDecription = ({ condition }) => {
     const [recents, setRecents] = useState([]);
     const wthrCtxt = useContext(WeatherContext);
@@ -13,6 +18,7 @@ const WeatherDecription = ({ condition }) => {
         let rcnt = localStorageService.getRecentSearched();
         if (rcnt !== null) setRecents(rcnt.slice(1, 3));
     }, [wthrCtxt.data?.location?.name]);
+
     return (
         <div className="row-span-2 flex flex-nowrap">
             {/* Weather condition text */}
@@ -36,7 +42,15 @@ const WeatherDecription = ({ condition }) => {
                 {/* Cards */}
                 <div className="flex flex-nowrap gap-4 justify-between">
                     {recents.length > 0 ? (
-                        recents.map((rcnt) => <OtherLocationCard loc={rcnt} key={rcnt} onClick={() => { wthrCtxt.updateLoc(rcnt) }} />)
+                        recents.map((rcnt) => (
+                            <OtherLocationCard
+                                loc={rcnt}
+                                key={rcnt}
+                                onClick={() => {
+                                    wthrCtxt.updateLoc(rcnt);
+                                }}
+                            />
+                        ))
                     ) : (
                         <h2 className="text-gray-300 text-center text-2xl">
                             No Recent Searched

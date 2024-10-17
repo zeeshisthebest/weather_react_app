@@ -3,6 +3,13 @@ import AirQuality from "./airQuality";
 import WindSpeed from "./windSpeed";
 import PropTypes from "prop-types";
 
+/**
+ * Displays current windspeed and the AirQuality Indexs
+ *
+ * @param {number} windspeed Windspeed of the location
+ * @param {Object} airIndex AirIndex object returned from the API
+ * @returns
+ */
 const WindAndAirIndex = ({ windSpeed, airIndex }) => {
     return (
         <div className="w-full mt-6">
@@ -15,6 +22,6 @@ const WindAndAirIndex = ({ windSpeed, airIndex }) => {
 WindAndAirIndex.propTypes = {
     windSpeed: PropTypes.number.isRequired,
     airIndex: PropTypes.number.isRequired,
-}
+};
 
 export default WindAndAirIndex;

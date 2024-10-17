@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+/**
+ * A Loading Icon that fills the parent
+ */
 const LoadingIcon = () => {
     return (<div className="w-full h-full bg-black absolute top-0 left-0 z-auto bg-opacity-80 flex justify-center">
         <div className="grid [&>*]:col-span-1 [&>*]:row-span-1 justify-items-center items-center relative align-middle">

@@ -1,6 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
+/**
+ * A row displaying windspeed along with the unit
+ * @param {number} windSpeed Windspeed
+ * @returns
+ */
 const WindSpeed = ({ windSpeed }) => {
     return (
         <div className="flex flex-nowrap gap-2 h-10 text-gray-200 items-center text-xl bg-gray-300 bg-opacity-10 py-2 px-2 rounded-md backdrop-blur-sm">
@@ -14,11 +19,12 @@ const WindSpeed = ({ windSpeed }) => {
                 {windSpeed}
                 <span className="text-sm pl-1">km/h</span>
             </p>
-        </div>);
-}
+        </div>
+    );
+};
 
 WindSpeed.propTypes = {
-    windSpeed: PropTypes.number.isRequired
-}
+    windSpeed: PropTypes.number.isRequired,
+};
 
 export default WindSpeed;

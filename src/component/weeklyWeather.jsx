@@ -1,48 +1,56 @@
 import React, { Component } from "react";
-
+import { WeatherContext } from "../contexts/contexts";
 import WeeklyWeatherGraph from "./weeklyWeatherGraph";
+import { toast } from "react-toastify";
 import {
     getWeekDays,
     getWeeklyWeather,
     mapWeeklyWeatherToModel,
 } from "../services/weeklyWeatherService";
-import { toast } from "react-toastify";
-import { WeatherContext } from "../contexts/contexts";
 
+/**
+ * Displays Weather forecast for a week starting from Today
+ */
 class WeeklyWeather extends Component {
     state = {
         weekDays: [],
         weeklyWeather: [],
         dataForDisplay: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        location:""
+        location: "",
     };
 
     static contextType = WeatherContext;
+    indexForToday = 0; // This moves current day position
 
-    indexForToday = 0;
-
+    /**
+     * Fetches the weather from API
+     */
     populateWeather = async () => {
         try {
-
-            let resp = await getWeeklyWeather(this.context.data?.location?.name ?? "");
-            if(!resp) return;
+            let resp = await getWeeklyWeather(
+                this.context.data?.location?.name ?? ""
+            );
+            if (!resp) return;
             let wthr = mapWeeklyWeatherToModel(resp.data.forecast.forecastday);
             this.setState({
                 weeklyWeather: wthr,
-                location: this.context.data?.location?.name ?? ""
+                location: this.context.data?.location?.name ?? "",
             });
             this.populateArray();
-            this.context.setMinMax(wthr[0]);
+            this.context.setMinMax(wthr[0]); // Setting Todays Hi and Low in dashboard state
         } catch (error) {
             toast.error("Couldn't get weekly Weather Updates");
         }
     };
 
+    /**
+     * Populates the array from API data for LineGraph and display
+     */
     populateArray = () => {
         let data = [];
         this.state.weeklyWeather.forEach((tmp) => {
             if (this.props.useMetric) {
-                data.push(tmp.minC)
+                data.push(tmp.minC);
                 data.push(tmp.maxC);
             } else {
                 data.push(tmp.minF);
@@ -55,17 +63,19 @@ class WeeklyWeather extends Component {
     };
 
     componentDidMount () {
-        this.populateWeather();;
+        this.populateWeather();
         let weekDays = getWeekDays(this.indexForToday);
         this.setState({ weekDays });
     }
 
     componentDidUpdate (prevProps, prevState) {
+        // Update on unit change
         if (prevProps.useMetric !== this.props.useMetric) {
             this.populateArray();
         }
 
-        if(this.context.data?.location?.name !== prevState.location){
+        //Update on location change
+        if (this.context.data?.location?.name !== prevState.location) {
             this.populateWeather();
         }
     }

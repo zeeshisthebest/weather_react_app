@@ -6,12 +6,10 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import PropTypes from "prop-types";
 
 
-
 /**
- *
- * @param {string} placeName Name for the label
+ * A 3d interactable Globe showing location given by lat,lon
+ * @param {string} placeName Label for the place
  * @param {object} coordiantes The object containing latitude and longitude
- * @returns
  */
 const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
     useEffect(() => {
@@ -72,6 +70,7 @@ const Globe = ({ placeName, coordinates: { latitude, longitude } }) => {
             return am5.Bullet.new(root, { sprite: circle });
         });
 
+        // For the delayed rotaion of globe to the new points
         setTimeout(() => {
             chart.animate({
                 key: "rotationX",

@@ -7,11 +7,12 @@ const apiEndPointAstro = configs.apiUrl + "/astronomy";
 
 
 /**
+ * Maps responses from APIs to the Object
  *
- * @param {object} current current weather from weatherCurrent Object
- * @param {object} location location from weatherCurrent Object
- * @param {object} astro Astro Object returned from /astronomy.json
- * @returns The data object for state
+ * @param {object} current current weather Object
+ * @param {object} location location Object
+ * @param {object} astro Astro Object
+ * @returns The object containing all these with extra fields removed for state
  */
 function mapWeatherToModel({current, location}, {astronomy: {astro}}){
     let currTime = location.localtime.split(" ");
@@ -42,7 +43,7 @@ function mapWeatherToModel({current, location}, {astronomy: {astro}}){
 }
 
 /**
- *
+ * Maps responses from API for recent weather
  * @param {Object} weather Weather Object returned by /current API
  * @param {Objet} astro Astro Object returned by /astro API
  * @returns an object with all the data mapped
@@ -62,9 +63,13 @@ function mapToRecentModel(weather, {astronomy: {astro}}){
 
 
 /**
+ * @async
+ *
+ * Gets current weather from the API
  *
  * @param {string} location To get weather of
- * @returns Promise
+ * @returns promise that will resolve into api response
+ * @throws Error thrown by AXIOS
  */
 function getCurrentWeather (location) {
     return http.get(apiEndPointWeather, {
@@ -73,9 +78,13 @@ function getCurrentWeather (location) {
 }
 
 /**
+ * @async
  *
- * @param {string} location Of which astro data is required
- * @returns
+ * Gets Atronomy data from the API
+ *
+ * @param {string} location location
+ * @returns promise that will resolve into api response
+ * @throws Error thrown by AXIOS
  */
 function getAstroData(location){
     return http.get(apiEndPointAstro, {params: {q: location}});

@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InfoCard from "./infoCard";
 import PropTypes from "prop-types";
+import SearchLocation from "./searchLocation";
 import {
 	faDroplet,
 	faLocationDot,
@@ -10,8 +11,19 @@ import {
 	faCalendar,
 	faTemperatureLow,
 } from "@fortawesome/free-solid-svg-icons";
-import SearchLocation from "./searchLocation";
 
+
+/**
+ * A Row containing Location and InfoCards
+ *
+ * @param {string} props.location Currently set location
+ * @param {number} props.humidity Level of humidity for the location
+ * @param {number} props.feelsLike Feels Like temperature for the location
+ * @param {number} props.visibility Visibility for the location
+ * @param {bool} props.isMetric If metric units should be used
+ * @param {string} props.localTime local time for the location
+ *
+ */
 const LocationAndInfo = (props) => {
 	const { location, humidity, feelsLike, visibility, isMetric, localTime } =
 		props;
@@ -61,6 +73,8 @@ LocationAndInfo.propTypes = {
 	feelsLike: PropTypes.number.isRequired,
 	visibility: PropTypes.number.isRequired,
 	isMetric: PropTypes.bool.isRequired,
+	humidity: PropTypes.number.isRequired,
+	localTime: PropTypes.string.isRequired
 };
 
 export default LocationAndInfo;

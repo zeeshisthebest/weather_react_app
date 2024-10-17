@@ -5,16 +5,14 @@ const is24 = 'is24';
 
 
 /**
- *
- * @returns The name of Current Location
+ * @returns The name of current location if stored else null
  */
 function getLocation() {
   return localStorage.getItem(loc);
 }
 
 /**
- *
- * @returns The list of recent searches, max 10
+ * @returns The list of recent searches, max 10 or null
  */
 function getRecentSearched()  {
   let recentItems =  localStorage.getItem(recent);
@@ -22,9 +20,7 @@ function getRecentSearched()  {
 }
 
 /**
- *
- * @param {string} value The Name of current location
- * @returns
+ * @param {string} value Location to set
  */
 function setLocation(value) {
   try {
@@ -37,8 +33,7 @@ function setLocation(value) {
 }
 
 /**
- *
- * @param {string} newLoc location to be added in the recent list
+ * @param {string} newLoc Location to be added in the recent list
  */
 function setRecentSearched(newLoc) {
   const maxLen = 10;
@@ -55,8 +50,7 @@ function setRecentSearched(newLoc) {
 }
 
 /**
- *
- * @param {bool} val is metric preferred
+ * @param {bool} val Is metric preferred
  */
 function setMetricPreference(val){
   try{
@@ -66,16 +60,14 @@ function setMetricPreference(val){
 }
 
 /**
- *
- * @returns The boolean value for metric preferrence
+ * @returns Boolean for metric preferrence
  */
 function getMetricPreference(){
     return JSON.parse(localStorage.getItem(metric) || 'true');
 }
 
 /**
- *
- * @param {bool} val is 24 hr preferred
+ * @param {bool} val Is 24 hr preferred
  */
 function setIs24(val){
   try{
@@ -84,13 +76,15 @@ function setIs24(val){
 }
 
 /**
- *
- * @returns The boolean value for 24 hr preferrence
+ * @returns Boolean for 24 hr preferrence
  */
 function getIs24(){
     return JSON.parse(localStorage.getItem(is24) || 'false');
 }
 
+/**
+ * Provides various function for handling data in localstorage
+ */
 const localStorageService = {
   getLocation: getLocation,
   setLocation: setLocation,

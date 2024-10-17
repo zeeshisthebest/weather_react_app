@@ -2,11 +2,15 @@ import { ChartsReferenceLine, LineChart, lineElementClasses, markElementClasses,
 import PropTypes from "prop-types";
 import React from "react";
 
+/**
+ * Line graph for the weekly Weather
+ *
+ * @param {Object} data Data for the whole week
+ * @param {number} currentDay Position of the Today in the week
+ */
 const WeeklyWeatherGraph = ({ data: weeklyWeather, currentDay }) => {
-
-
-    const low = weeklyWeather.length === 0 ? 0 : Math.min(...weeklyWeather);
-    const high = weeklyWeather.length === 0 ? 0 : Math.max(...weeklyWeather);
+    const low = weeklyWeather.length === 0 ? 0 : Math.min(...weeklyWeather); // Lowest of the week
+    const high = weeklyWeather.length === 0 ? 0 : Math.max(...weeklyWeather); //Highet of the week
     let avg = (low + high) / 2;
 
     return (
@@ -65,7 +69,8 @@ const WeeklyWeatherGraph = ({ data: weeklyWeather, currentDay }) => {
 };
 
 WeeklyWeatherGraph.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.array.isRequired,
+    currentDay: PropTypes.number.isRequired
 }
 
 export default WeeklyWeatherGraph;
