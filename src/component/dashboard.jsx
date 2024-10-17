@@ -15,7 +15,6 @@ class DashboardView extends Component {
         weatherBg: weatherIcons.wBg.sunnyDay,
         data: {},
         minMax: {},
-        loading: true,
         updatedAt: null,
     };
 
@@ -71,9 +70,9 @@ class DashboardView extends Component {
         } catch (error) {
             console.log(error);
             toast.error("Error: Couldn't get weather info");
+            this.setState({ data: { msg: "Didn't get any data" } });
         }
-        this.setState({ loading: false });
-        console.log(this.state.loading);
+
     };
 
     /**
@@ -112,10 +111,10 @@ class DashboardView extends Component {
         while (!Object.keys(this.state.data).length && retries <= 3) {
             setTimeout(() => {
                 this.getWeather();
-                this.refreshApp();
             }, 1500);
             ++retries;
         }
+        this.refreshApp();
     }
 
     componentWillUnmount () {
@@ -154,7 +153,7 @@ class DashboardView extends Component {
                         Last Updated at: {this.state.updatedAt ?? "never"}
                     </span>
                 </div>
-                {!this.loading || Object.keys(data).length || <LoadingIcon />}
+                {Object.keys(data).length || <LoadingIcon />}
             </main>
         );
     }
