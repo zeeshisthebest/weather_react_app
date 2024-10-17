@@ -4,7 +4,6 @@ import React from "react";
 /**
  * A row displaying windspeed along with the unit
  * @param {number} windSpeed Windspeed
- * @returns
  */
 const WindSpeed = ({ windSpeed }) => {
     return (

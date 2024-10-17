@@ -15,8 +15,8 @@ async function getIp() {
 }
 
 /**
- * @async
  * Tries to get the location from the user public IP address
+ * @async
  *
  * @returns The Location Object
  * @throws Error thrown by Axios

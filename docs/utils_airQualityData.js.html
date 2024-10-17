@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/airQualityData.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/airQualityData.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>function calculateAQI(pollutant, concentration) {
+    // Define the breakpoints for each pollutant
+    const breakpoints = {
+        "pm2_5": [
+            { C_lo: 0.0, C_hi: 12.0, I_lo: 0, I_hi: 50 },
+            { C_lo: 12.1, C_hi: 35.4, I_lo: 51, I_hi: 100 },
+            { C_lo: 35.5, C_hi: 55.4, I_lo: 101, I_hi: 150 },
+            { C_lo: 55.5, C_hi: 150.4, I_lo: 151, I_hi: 200 },
+            { C_lo: 150.5, C_hi: 250.4, I_lo: 201, I_hi: 300 },
+            { C_lo: 250.5, C_hi: 500.0, I_lo: 301, I_hi: 500 }
+        ],
+        "pm10": [
+            { C_lo: 0, C_hi: 54, I_lo: 0, I_hi: 50 },
+            { C_lo: 55, C_hi: 154, I_lo: 51, I_hi: 100 },
+            { C_lo: 155, C_hi: 254, I_lo: 101, I_hi: 150 },
+            { C_lo: 255, C_hi: 354, I_lo: 151, I_hi: 200 },
+            { C_lo: 355, C_hi: 424, I_lo: 201, I_hi: 300 },
+            { C_lo: 425, C_hi: 604, I_lo: 301, I_hi: 500 }
+        ],
+        "so2": [
+            { C_lo: 0, C_hi: 35, I_lo: 0, I_hi: 50 },
+            { C_lo: 36, C_hi: 75, I_lo: 51, I_hi: 100 },
+            { C_lo: 76, C_hi: 185, I_lo: 101, I_hi: 150 },
+            { C_lo: 186, C_hi: 304, I_lo: 151, I_hi: 200 },
+            { C_lo: 305, C_hi: 604, I_lo: 201, I_hi: 300 }
+        ],
+        "no2": [
+            { C_lo: 0, C_hi: 53, I_lo: 0, I_hi: 50 },
+            { C_lo: 54, C_hi: 100, I_lo: 51, I_hi: 100 },
+            { C_lo: 101, C_hi: 360, I_lo: 101, I_hi: 150 },
+            { C_lo: 361, C_hi: 649, I_lo: 151, I_hi: 200 },
+            { C_lo: 650, C_hi: 1249, I_lo: 201, I_hi: 300 }
+        ],
+        "co": [
+            { C_lo: 0.0, C_hi: 4.4 * 1145, I_lo: 0, I_hi: 50 },
+            { C_lo: 4.5 * 1145, C_hi: 9.4 * 1145, I_lo: 51, I_hi: 100 },
+            { C_lo: 9.5 * 1145, C_hi: 12.4 * 1145, I_lo: 101, I_hi: 150 },
+            { C_lo: 12.5 * 1145, C_hi: 15.4 * 1145, I_lo: 151, I_hi: 200 }
+        ],
+        "o3": [
+            { C_lo: 0, C_hi: 54 * 2, I_lo: 0, I_hi: 50 },
+            { C_lo: 55 * 2, C_hi: 70 * 2, I_lo: 51, I_hi: 100 },
+            { C_lo: 71 * 2, C_hi: 85 * 2, I_lo: 101, I_hi: 150 },
+            { C_lo: 86 * 2, C_hi: 105 * 2, I_lo: 151, I_hi: 200 },
+            { C_lo: 106 * 2, C_hi: 200 * 2, I_lo: 201, I_hi: 300 }
+        ]
+    };
+
+    const bp = breakpoints[pollutant];
+
+    // Find the correct range in breakpoints for the given concentration
+    for (let i = 0; i &lt; bp.length; i++) {
+        if (concentration >= bp[i].C_lo &amp;&amp; concentration &lt;= bp[i].C_hi) {
+            // Apply the linear interpolation formula
+            const AQI = ((bp[i].I_hi - bp[i].I_lo) / (bp[i].C_hi - bp[i].C_lo)) * (concentration - bp[i].C_lo) + bp[i].I_lo;
+            return Math.round(AQI);  // Return the AQI value rounded to nearest integer
+        }
+    }
+
+    // If the concentration is out of range
+    return "0";
+}
+
+
+/**
+ *
+ * @param {Object} airQualityData object containin data of each pollutant
+ *
+ * @returns The AQI based on the max among the given pollutants
+ */
+export function getAQI(airQualityData){
+    let co = calculateAQI('co', airQualityData['co']);
+    let no2 = calculateAQI('no2', airQualityData['no2']);
+    let o3 = calculateAQI('o3', airQualityData['o3']);
+    let so2 = calculateAQI('so2', airQualityData['so2']);
+    let pm2_5 = calculateAQI('pm2_5', airQualityData['pm2_5']);
+    let pm10 = calculateAQI('pm10', airQualityData['pm10']);
+    return Math.max(co, no2, o3, so2, pm2_5, pm10);
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DashboardView.html">DashboardView</a></li><li><a href="LeftSideBar.html">LeftSideBar</a></li><li><a href="MainContent.html">MainContent</a></li><li><a href="WeeklyWeather.html">WeeklyWeather</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AirQuality">AirQuality</a></li><li><a href="global.html#AirQualityGraph">AirQualityGraph</a></li><li><a href="global.html#Globe">Globe</a></li><li><a href="global.html#HiLow">HiLow</a></li><li><a href="global.html#InfoCard">InfoCard</a></li><li><a href="global.html#LoadingIcon">LoadingIcon</a></li><li><a href="global.html#LocationAndInfo">LocationAndInfo</a></li><li><a href="global.html#OtherLocationCard">OtherLocationCard</a></li><li><a href="global.html#SearchLocation">SearchLocation</a></li><li><a href="global.html#SkeletonOtherLocationCard">SkeletonOtherLocationCard</a></li><li><a href="global.html#SunriseSunset">SunriseSunset</a></li><li><a href="global.html#Temprature">Temprature</a></li><li><a href="global.html#UnitSelector">UnitSelector</a></li><li><a href="global.html#UseMetricsContext">UseMetricsContext</a></li><li><a href="global.html#UvIndex">UvIndex</a></li><li><a href="global.html#WeatherContext">WeatherContext</a></li><li><a href="global.html#WeatherDecription">WeatherDecription</a></li><li><a href="global.html#WeeklyWeatherGraph">WeeklyWeatherGraph</a></li><li><a href="global.html#WindAndAirIndex">WindAndAirIndex</a></li><li><a href="global.html#WindSpeed">WindSpeed</a></li><li><a href="global.html#codes">codes</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#getAQI">getAQI</a></li><li><a href="global.html#getAirQualityRemark">getAirQualityRemark</a></li><li><a href="global.html#getAstroData">getAstroData</a></li><li><a href="global.html#getCurrentWeather">getCurrentWeather</a></li><li><a href="global.html#getIp">getIp</a></li><li><a href="global.html#getIs24">getIs24</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getLocationFromIp">getLocationFromIp</a></li><li><a href="global.html#getMetricPreference">getMetricPreference</a></li><li><a href="global.html#getRecentSearched">getRecentSearched</a></li><li><a href="global.html#getUnit">getUnit</a></li><li><a href="global.html#getWeatherBg">getWeatherBg</a></li><li><a href="global.html#getWeatherIcons">getWeatherIcons</a></li><li><a href="global.html#getWeekDays">getWeekDays</a></li><li><a href="global.html#getWeeklyWeather">getWeeklyWeather</a></li><li><a href="global.html#lineChartOptions">lineChartOptions</a></li><li><a href="global.html#localStorageService">localStorageService</a></li><li><a href="global.html#mapToRecentModel">mapToRecentModel</a></li><li><a href="global.html#mapWeatherToModel">mapWeatherToModel</a></li><li><a href="global.html#mapWeeklyWeatherToModel">mapWeeklyWeatherToModel</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setIs24">setIs24</a></li><li><a href="global.html#setLocation">setLocation</a></li><li><a href="global.html#setMetricPreference">setMetricPreference</a></li><li><a href="global.html#setRecentSearched">setRecentSearched</a></li><li><a href="global.html#to24">to24</a></li><li><a href="global.html#withinRange">withinRange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Oct 17 2024 20:55:15 GMT+0500 (Pakistan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

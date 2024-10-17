@@ -26,7 +26,7 @@ const getAirQualityRemark = (qlty) => {
 /**
  *
  * @param {number} airQuality AQI index, should be withing the range 0 - 500
- * @returns
+ *
  */
 const AirQuality = ({ airQuality }) => {
     return (

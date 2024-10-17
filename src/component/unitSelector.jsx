@@ -5,7 +5,7 @@ import React from "react";
  * @param {string} unit Unit to be displayed
  * @param {bool} isSlctd If it is selected
  * @param {func} onUnitSelect Callback function to change the unit
- * @returns
+ *
  */
 const getUnit = (unit, isSlctd, onUnitSelect) => {
     let twClass =

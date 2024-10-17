@@ -63,10 +63,10 @@ function mapToRecentModel(weather, {astronomy: {astro}}){
 
 
 /**
- * @async
  *
  * Gets current weather from the API
- *
+*
+ * @async
  * @param {string} location To get weather of
  * @returns promise that will resolve into api response
  * @throws Error thrown by AXIOS
@@ -78,9 +78,9 @@ function getCurrentWeather (location) {
 }
 
 /**
- * @async
  *
  * Gets Atronomy data from the API
+ * @async
  *
  * @param {string} location location
  * @returns promise that will resolve into api response

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: component/weeklyWeather.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: component/weeklyWeather.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import { WeatherContext } from "../contexts/contexts";
+import WeeklyWeatherGraph from "./weeklyWeatherGraph";
+import { toast } from "react-toastify";
+import {
+    getWeekDays,
+    getWeeklyWeather,
+    mapWeeklyWeatherToModel,
+} from "../services/weeklyWeatherService";
+
+/**
+ * Displays Weather forecast for a week starting from Today
+ */
+class WeeklyWeather extends Component {
+    state = {
+        weekDays: [],
+        weeklyWeather: [],
+        dataForDisplay: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        location: "",
+    };
+
+    static contextType = WeatherContext;
+    indexForToday = 0; // This moves current day position
+
+    /**
+     * Fetches the weather from API
+     */
+    populateWeather = async () => {
+        try {
+            let resp = await getWeeklyWeather(
+                this.context.data?.location?.name ?? ""
+            );
+            if (!resp) return;
+            let wthr = mapWeeklyWeatherToModel(resp.data.forecast.forecastday);
+            this.setState({
+                weeklyWeather: wthr,
+                location: this.context.data?.location?.name ?? "",
+            });
+            this.populateArray();
+            this.context.setMinMax(wthr[0]); // Setting Todays Hi and Low in dashboard state
+        } catch (error) {
+            toast.error("Couldn't get weekly Weather Updates");
+        }
+    };
+
+    /**
+     * Populates the array from API data for LineGraph and display
+     */
+    populateArray = () => {
+        let data = [];
+        this.state.weeklyWeather.forEach((tmp) => {
+            if (this.props.useMetric) {
+                data.push(tmp.minC);
+                data.push(tmp.maxC);
+            } else {
+                data.push(tmp.minF);
+                data.push(tmp.maxF);
+            }
+        });
+        this.setState({
+            dataForDisplay: data,
+        });
+    };
+
+    componentDidMount () {
+        this.populateWeather();
+        let weekDays = getWeekDays(this.indexForToday);
+        this.setState({ weekDays });
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+        // Update on unit change
+        if (prevProps.useMetric !== this.props.useMetric) {
+            this.populateArray();
+        }
+
+        //Update on location change
+        if (this.context.data?.location?.name !== prevState.location) {
+            this.populateWeather();
+        }
+    }
+
+    render () {
+        const { weekDays, dataForDisplay, weeklyWeather } = this.state;
+        return (
+            &lt;div className="row-span-2 grid grid-cols-7 grid-rows-4 justify-center align-middle items-center w-full text-gray-400 overflow-visible">
+                {/* Name of the days */}
+                {weekDays.map((day, ind) => {
+                    let cls = "w-full text-center text-xl col-span-1 ";
+                    if (ind === this.indexForToday) cls += " font-bold text-gray-100";
+                    return (
+                        &lt;div key={ind} className={cls}>
+                            {ind === this.indexForToday ? "Today" : day}
+                        &lt;/div>
+                    );
+                })}
+
+                {/* Daily Graph */}
+                &lt;div className="w-full h-full col-span-7 row-span-2 overflow-visible">
+                    &lt;WeeklyWeatherGraph
+                        data={dataForDisplay}
+                        currentDay={this.indexForToday}
+                    />
+                &lt;/div>
+
+                {/* Daily temperature */}
+                {weeklyWeather.map((temp, ind) => {
+                    let cls = "w-full text-center col-span-1 font-bold text-xl self-end";
+                    if (ind === this.indexForToday) cls += " text-gray-100";
+                    return (
+                        &lt;div className={cls} key={ind}>
+                            {this.props.useMetric ? temp.maxC : temp.maxF}&amp;deg;
+                            &lt;br />
+                            {this.props.useMetric ? temp.minC : temp.minF}&amp;deg;
+                        &lt;/div>
+                    );
+                })}
+            &lt;/div>
+        );
+    }
+}
+
+export default WeeklyWeather;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DashboardView.html">DashboardView</a></li><li><a href="LeftSideBar.html">LeftSideBar</a></li><li><a href="MainContent.html">MainContent</a></li><li><a href="WeeklyWeather.html">WeeklyWeather</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AirQuality">AirQuality</a></li><li><a href="global.html#AirQualityGraph">AirQualityGraph</a></li><li><a href="global.html#Globe">Globe</a></li><li><a href="global.html#HiLow">HiLow</a></li><li><a href="global.html#InfoCard">InfoCard</a></li><li><a href="global.html#LoadingIcon">LoadingIcon</a></li><li><a href="global.html#LocationAndInfo">LocationAndInfo</a></li><li><a href="global.html#OtherLocationCard">OtherLocationCard</a></li><li><a href="global.html#SearchLocation">SearchLocation</a></li><li><a href="global.html#SkeletonOtherLocationCard">SkeletonOtherLocationCard</a></li><li><a href="global.html#SunriseSunset">SunriseSunset</a></li><li><a href="global.html#Temprature">Temprature</a></li><li><a href="global.html#UnitSelector">UnitSelector</a></li><li><a href="global.html#UseMetricsContext">UseMetricsContext</a></li><li><a href="global.html#UvIndex">UvIndex</a></li><li><a href="global.html#WeatherContext">WeatherContext</a></li><li><a href="global.html#WeatherDecription">WeatherDecription</a></li><li><a href="global.html#WeeklyWeatherGraph">WeeklyWeatherGraph</a></li><li><a href="global.html#WindAndAirIndex">WindAndAirIndex</a></li><li><a href="global.html#WindSpeed">WindSpeed</a></li><li><a href="global.html#codes">codes</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#getAQI">getAQI</a></li><li><a href="global.html#getAirQualityRemark">getAirQualityRemark</a></li><li><a href="global.html#getAstroData">getAstroData</a></li><li><a href="global.html#getCurrentWeather">getCurrentWeather</a></li><li><a href="global.html#getIp">getIp</a></li><li><a href="global.html#getIs24">getIs24</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getLocationFromIp">getLocationFromIp</a></li><li><a href="global.html#getMetricPreference">getMetricPreference</a></li><li><a href="global.html#getRecentSearched">getRecentSearched</a></li><li><a href="global.html#getUnit">getUnit</a></li><li><a href="global.html#getWeatherBg">getWeatherBg</a></li><li><a href="global.html#getWeatherIcons">getWeatherIcons</a></li><li><a href="global.html#getWeekDays">getWeekDays</a></li><li><a href="global.html#getWeeklyWeather">getWeeklyWeather</a></li><li><a href="global.html#lineChartOptions">lineChartOptions</a></li><li><a href="global.html#localStorageService">localStorageService</a></li><li><a href="global.html#mapToRecentModel">mapToRecentModel</a></li><li><a href="global.html#mapWeatherToModel">mapWeatherToModel</a></li><li><a href="global.html#mapWeeklyWeatherToModel">mapWeeklyWeatherToModel</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setIs24">setIs24</a></li><li><a href="global.html#setLocation">setLocation</a></li><li><a href="global.html#setMetricPreference">setMetricPreference</a></li><li><a href="global.html#setRecentSearched">setRecentSearched</a></li><li><a href="global.html#to24">to24</a></li><li><a href="global.html#withinRange">withinRange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Oct 17 2024 20:55:15 GMT+0500 (Pakistan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

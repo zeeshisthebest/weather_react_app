@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/weeklyWeatherService.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/weeklyWeatherService.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import configs from "../config.json";
+import httpService from "./httpService";
+
+const apiEndPoint = configs.apiUrl + "/forecast";
+
+/**
+ * Fetched the weekly weather of the given location starting today
+ * @async
+ * @param {string} location Location
+ * @returns A promise that will resolve into object
+ * @throws Error thrown by axios
+ */
+function getWeeklyWeather (location) {
+    if(!location) return null;
+    return httpService.get(apiEndPoint, {params: {q: location,}});
+}
+
+
+/**
+ * Genarates day of the week dynamically starting from today
+ *
+ * @param {number} dayOffset The index of day (sunday=0, saturday=7)
+ * @returns Array containing Long Days starting today
+ * @throws Error from axios
+ *
+ */
+function getWeekDays (dayOffset) {
+    let today = new Date();
+    let weekDay = [];
+
+    for (let i = 0; i &lt;= 6; i++) {
+        let date = new Date();
+        date.setDate(today.getDate() + i - dayOffset); // shifts date to yesterday
+        weekDay.push(date.toLocaleDateString("en-US", { weekday: "long" }));
+    }
+    return weekDay;
+}
+
+
+/**
+ *
+ * @param {Array} data Array of weekly weather data
+ * @returns Array of weekly weather
+ */
+function mapWeeklyWeatherToModel(data){
+    let weeklyWeather = [];
+    data.forEach(({day}) => {
+        weeklyWeather.push({
+            maxC: Math.round(day.maxtemp_c),
+            maxF: Math.round(day.maxtemp_f),
+            minC: Math.round(day.mintemp_c),
+            minF: Math.round(day.mintemp_f)
+        })
+
+    });
+
+    return weeklyWeather;
+}
+
+export { getWeekDays, getWeeklyWeather, mapWeeklyWeatherToModel };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DashboardView.html">DashboardView</a></li><li><a href="LeftSideBar.html">LeftSideBar</a></li><li><a href="MainContent.html">MainContent</a></li><li><a href="WeeklyWeather.html">WeeklyWeather</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AirQuality">AirQuality</a></li><li><a href="global.html#AirQualityGraph">AirQualityGraph</a></li><li><a href="global.html#Globe">Globe</a></li><li><a href="global.html#HiLow">HiLow</a></li><li><a href="global.html#InfoCard">InfoCard</a></li><li><a href="global.html#LoadingIcon">LoadingIcon</a></li><li><a href="global.html#LocationAndInfo">LocationAndInfo</a></li><li><a href="global.html#OtherLocationCard">OtherLocationCard</a></li><li><a href="global.html#SearchLocation">SearchLocation</a></li><li><a href="global.html#SkeletonOtherLocationCard">SkeletonOtherLocationCard</a></li><li><a href="global.html#SunriseSunset">SunriseSunset</a></li><li><a href="global.html#Temprature">Temprature</a></li><li><a href="global.html#UnitSelector">UnitSelector</a></li><li><a href="global.html#UseMetricsContext">UseMetricsContext</a></li><li><a href="global.html#UvIndex">UvIndex</a></li><li><a href="global.html#WeatherContext">WeatherContext</a></li><li><a href="global.html#WeatherDecription">WeatherDecription</a></li><li><a href="global.html#WeeklyWeatherGraph">WeeklyWeatherGraph</a></li><li><a href="global.html#WindAndAirIndex">WindAndAirIndex</a></li><li><a href="global.html#WindSpeed">WindSpeed</a></li><li><a href="global.html#codes">codes</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#getAQI">getAQI</a></li><li><a href="global.html#getAirQualityRemark">getAirQualityRemark</a></li><li><a href="global.html#getAstroData">getAstroData</a></li><li><a href="global.html#getCurrentWeather">getCurrentWeather</a></li><li><a href="global.html#getIp">getIp</a></li><li><a href="global.html#getIs24">getIs24</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getLocationFromIp">getLocationFromIp</a></li><li><a href="global.html#getMetricPreference">getMetricPreference</a></li><li><a href="global.html#getRecentSearched">getRecentSearched</a></li><li><a href="global.html#getUnit">getUnit</a></li><li><a href="global.html#getWeatherBg">getWeatherBg</a></li><li><a href="global.html#getWeatherIcons">getWeatherIcons</a></li><li><a href="global.html#getWeekDays">getWeekDays</a></li><li><a href="global.html#getWeeklyWeather">getWeeklyWeather</a></li><li><a href="global.html#lineChartOptions">lineChartOptions</a></li><li><a href="global.html#localStorageService">localStorageService</a></li><li><a href="global.html#mapToRecentModel">mapToRecentModel</a></li><li><a href="global.html#mapWeatherToModel">mapWeatherToModel</a></li><li><a href="global.html#mapWeeklyWeatherToModel">mapWeeklyWeatherToModel</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setIs24">setIs24</a></li><li><a href="global.html#setLocation">setLocation</a></li><li><a href="global.html#setMetricPreference">setMetricPreference</a></li><li><a href="global.html#setRecentSearched">setRecentSearched</a></li><li><a href="global.html#to24">to24</a></li><li><a href="global.html#withinRange">withinRange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Oct 17 2024 20:55:15 GMT+0500 (Pakistan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

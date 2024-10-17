@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: component/AirQualityGraph.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: component/AirQualityGraph.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import PropTypes from "prop-types";
+import { ChartsReferenceLine } from "@mui/x-charts";
+import {
+    LineChart,
+    lineElementClasses,
+    markElementClasses,
+} from "@mui/x-charts/LineChart";
+
+
+/**
+ *  Options and configuration for the line Chart
+ */
+const lineChartOptions = {
+    sx: {
+        [`&amp; .${lineElementClasses.root}`]: {
+            strokeDasharray: "10 5",
+            strokeWidth: 0,
+        },
+        "&amp; .MuiAreaElement-series-Quality": {
+            fill: "url('#airQualityGradient')",
+        },
+        [`&amp; .${markElementClasses.root}`]: {
+            stroke: "#fff",
+            scale: "0",
+            strokeWidth: 0,
+        },
+        "&amp; .MuiChartsAxis-bottom .MuiChartsAxis-line": {
+            stroke: "#f0f0f0",
+            strokeWidth: 1,
+        },
+        "&amp; .MuiChartsAxis-bottom .MuiChartsAxis-tick": {
+            stroke: "#FFF",
+            strokeWidth: 1,
+        },
+    },
+    xAxis: [
+        {
+            data: [0, 50, 100, 200, 300, 500],
+            min: 0,
+            max: 500,
+            scaleType: "linear",
+            tickInterval: [0, 50, 100, 200, 300, 500],
+            tickLabelInterval: (val) => val % 100 === 0,
+        },
+    ],
+    yAxis: [{ min: 0, max: 10, }],
+
+    margin: { left: 10, top: 0, right: 10, bottom: 20 },
+    height: 40,
+    bottomAxis: {
+        stroke: "white",
+        fill: "white",
+        tickLabelStyle: {
+            angle: 0,
+            textAnchor: "middle",
+            fontSize: 10,
+            color: "#fff",
+            fill: "white",
+        },
+    },
+    leftAxis: null,
+    tooltip: { trigger: "none" }
+}
+
+/**
+ * The Linechart graph for AQI with range 0-500
+ */
+const AirQualityGraph = (props) => {
+
+    return (
+        &lt;LineChart {...lineChartOptions} series={[
+            {
+                id: "Quality",
+                area: true,
+                data: [4, 4, 4, 4, 4, 4],
+                showMark: ({ position }) => position === props.airQuality,
+                disableHighlight: true,
+            },
+        ]}>
+            &lt;defs>
+                &lt;linearGradient id="airQualityGradient">
+                    &lt;stop offset="10%" stopColor="#6DDD42" />
+                    &lt;stop offset="20%" stopColor="#FBEF51" />
+                    &lt;stop offset="30%" stopColor="#EF8232" />
+                    &lt;stop offset="40%" stopColor="#EA4024" />
+                    &lt;stop offset="60%" stopColor="#721D24" />
+                    &lt;stop offset="100%" stopColor="#834592" />
+                &lt;/linearGradient>
+            &lt;/defs>
+            &lt;ChartsReferenceLine
+                x={props.airQuality}
+                label={props.airQuality.toString()}
+                spacing={{ x: 10 }}
+                lineStyle={{ stroke: "white", strokeDasharray: 2, strokeWidth: 2 }}
+                labelStyle={{ fontSize: "16px", fill: "white" }}
+            />
+        &lt;/LineChart>
+    );
+};
+
+AirQualityGraph.propTypes = {
+    /**
+     * AQI withing range 0-500
+     */
+    airQuality: PropTypes.number.isRequired,
+};
+
+export default AirQualityGraph;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DashboardView.html">DashboardView</a></li><li><a href="LeftSideBar.html">LeftSideBar</a></li><li><a href="MainContent.html">MainContent</a></li><li><a href="WeeklyWeather.html">WeeklyWeather</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AirQuality">AirQuality</a></li><li><a href="global.html#AirQualityGraph">AirQualityGraph</a></li><li><a href="global.html#Globe">Globe</a></li><li><a href="global.html#HiLow">HiLow</a></li><li><a href="global.html#InfoCard">InfoCard</a></li><li><a href="global.html#LoadingIcon">LoadingIcon</a></li><li><a href="global.html#LocationAndInfo">LocationAndInfo</a></li><li><a href="global.html#OtherLocationCard">OtherLocationCard</a></li><li><a href="global.html#SearchLocation">SearchLocation</a></li><li><a href="global.html#SkeletonOtherLocationCard">SkeletonOtherLocationCard</a></li><li><a href="global.html#SunriseSunset">SunriseSunset</a></li><li><a href="global.html#Temprature">Temprature</a></li><li><a href="global.html#UnitSelector">UnitSelector</a></li><li><a href="global.html#UseMetricsContext">UseMetricsContext</a></li><li><a href="global.html#UvIndex">UvIndex</a></li><li><a href="global.html#WeatherContext">WeatherContext</a></li><li><a href="global.html#WeatherDecription">WeatherDecription</a></li><li><a href="global.html#WeeklyWeatherGraph">WeeklyWeatherGraph</a></li><li><a href="global.html#WindAndAirIndex">WindAndAirIndex</a></li><li><a href="global.html#WindSpeed">WindSpeed</a></li><li><a href="global.html#codes">codes</a></li><li><a href="global.html#debounce">debounce</a></li><li><a href="global.html#getAQI">getAQI</a></li><li><a href="global.html#getAirQualityRemark">getAirQualityRemark</a></li><li><a href="global.html#getAstroData">getAstroData</a></li><li><a href="global.html#getCurrentWeather">getCurrentWeather</a></li><li><a href="global.html#getIp">getIp</a></li><li><a href="global.html#getIs24">getIs24</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#getLocationFromIp">getLocationFromIp</a></li><li><a href="global.html#getMetricPreference">getMetricPreference</a></li><li><a href="global.html#getRecentSearched">getRecentSearched</a></li><li><a href="global.html#getUnit">getUnit</a></li><li><a href="global.html#getWeatherBg">getWeatherBg</a></li><li><a href="global.html#getWeatherIcons">getWeatherIcons</a></li><li><a href="global.html#getWeekDays">getWeekDays</a></li><li><a href="global.html#getWeeklyWeather">getWeeklyWeather</a></li><li><a href="global.html#lineChartOptions">lineChartOptions</a></li><li><a href="global.html#localStorageService">localStorageService</a></li><li><a href="global.html#mapToRecentModel">mapToRecentModel</a></li><li><a href="global.html#mapWeatherToModel">mapWeatherToModel</a></li><li><a href="global.html#mapWeeklyWeatherToModel">mapWeeklyWeatherToModel</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#setIs24">setIs24</a></li><li><a href="global.html#setLocation">setLocation</a></li><li><a href="global.html#setMetricPreference">setMetricPreference</a></li><li><a href="global.html#setRecentSearched">setRecentSearched</a></li><li><a href="global.html#to24">to24</a></li><li><a href="global.html#withinRange">withinRange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Oct 17 2024 20:55:15 GMT+0500 (Pakistan Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

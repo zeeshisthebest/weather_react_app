@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  *
  * @param {number} windspeed Windspeed of the location
  * @param {Object} airIndex AirIndex object returned from the API
- * @returns
+ *
  */
 const WindAndAirIndex = ({ windSpeed, airIndex }) => {
     return (
