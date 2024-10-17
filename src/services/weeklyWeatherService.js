@@ -1,22 +1,16 @@
 import configs from "../config.json";
 import httpService from "./httpService";
 
-const apiEndPoint = configs.apiUrl + "/forecast.json";
+const apiEndPoint = configs.apiUrl + "/forecast";
 
+/**
+ *
+ * @param {string} location Of which weekly weather is needed starting from today
+ * @returns A promise that will resolve into object
+ */
 function getWeeklyWeather (location) {
-
-    if(!location) return null;;
-
-    return httpService.get(apiEndPoint, {
-        params: {
-            key: process.env.REACT_APP_API_KEY,
-            q: location,
-            aqi: "no",
-            alerts: "no",
-            tp: 24,
-            days: 7,
-        },
-    });
+    if(!location) return null;
+    return httpService.get(apiEndPoint, {params: {q: location,}});
 }
 
 
@@ -58,5 +52,3 @@ function mapWeeklyWeatherToModel(data){
 }
 
 export { getWeekDays, getWeeklyWeather, mapWeeklyWeatherToModel };
-
-// https://api.weatherapi.com/v1/forecast.json?key=90ed859212ec45a288d104126240710&q=karachi&days=7&aqi=no&alerts=no&tp=24

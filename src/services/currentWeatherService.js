@@ -1,9 +1,9 @@
 import http from "./httpService";
 import configs from "../config.json";
-import utils from "../component/utils/utils";
+import utils from "../utils/utils";
 
-const apiEndPointWeather = configs.apiUrl + "/current.json";
-const apiEndPointAstro = configs.apiUrl + "/astronomy.json";
+const apiEndPointWeather = configs.apiUrl + "/current";
+const apiEndPointAstro = configs.apiUrl + "/astronomy";
 
 
 /**
@@ -41,6 +41,12 @@ function mapWeatherToModel({current, location}, {astronomy: {astro}}){
     }
 }
 
+/**
+ *
+ * @param {Object} weather Weather Object returned by /current API
+ * @param {Objet} astro Astro Object returned by /astro API
+ * @returns an object with all the data mapped
+ */
 function mapToRecentModel(weather, {astronomy: {astro}}){
     let currTime = weather.location.localtime.split(" ");
     return {
@@ -62,11 +68,7 @@ function mapToRecentModel(weather, {astronomy: {astro}}){
  */
 function getCurrentWeather (location) {
     return http.get(apiEndPointWeather, {
-        params: {
-            key: process.env.REACT_APP_API_KEY,
-            aqi: "yes",
-            q: location,
-        },
+        params: {aqi: "yes",q: location}
     });
 }
 
@@ -76,12 +78,7 @@ function getCurrentWeather (location) {
  * @returns
  */
 function getAstroData(location){
-    return http.get(apiEndPointAstro, {
-        params: {
-            key: process.env.REACT_APP_API_KEY,
-            q: location,
-        },
-    });
+    return http.get(apiEndPointAstro, {params: {q: location}});
 }
 
 const currentWeatherService = {

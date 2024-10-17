@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FormControlLabel, FormGroup, Typography } from "@mui/material";
-import { SwitchAirbnb } from "./utils/switchStyle.ts";
+import { SwitchAirbnb } from "../utils/switchStyle.ts";
 import localStorageService from "../services/localStorageService.js";
-import utils from "./utils/utils.js";
+import utils from "../utils/utils.js";
 
 
 const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
@@ -43,7 +43,7 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
             </FormGroup>
             <div className="text-center">
                 <img
-                    src="/assets/weather_icons/sunrise.png"
+                    src="assets/weather_icons/sunrise.png"
                     alt=""
                     className="h-10 mx-auto "
                 />
@@ -55,7 +55,7 @@ const SunriseSunset = ({ sunriseTime, sunsetTime }) => {
             </div>
             <div className="text-center">
                 <img
-                    src="/assets/weather_icons/sunset1.png"
+                    src="assets/weather_icons/sunset1.png"
                     alt=""
                     className="mx-auto h-10"
                 />

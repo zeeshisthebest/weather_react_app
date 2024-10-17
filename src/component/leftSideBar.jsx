@@ -4,7 +4,7 @@ import SunriseSunset from "./sunserSunrise";
 import UvIndex from "./uvIndex";
 import WindAndAirIndex from "./windAndAirIndex";
 import { WeatherContext } from "../contexts/contexts";
-import { getAQI } from "./utils/airQualityData";
+import { getAQI } from "../utils/airQualityData";
 
 class LeftSideBar extends Component {
     static contextType = WeatherContext;

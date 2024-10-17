@@ -23,7 +23,7 @@ const AirQuality = ({ airQuality }) => {
         <div className=" bg-gray-300 bg-opacity-10 py-2 px-2 rounded-md  mt-3 backdrop-blur-sm">
             <div className="flex flex-nowrap gap-2 h-7 text-gray-200 items-center text-xl mb-3">
                 <img
-                    src="/assets/weather_icons/windy.png"
+                    src="assets/weather_icons/windy.png"
                     className="h-full w-10"
                     alt=""
                 />

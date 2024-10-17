@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LeftSideBar from "./leftSideBar";
 import MainContent from "./mainContent";
 import LoadingIcon from "./common/loadingIcon";
-import weatherIcons from "./utils/weatherIcons";
+import weatherIcons from "../utils/weatherIcons";
 import storageService from "../services/localStorageService";
 import { getLocationFromIp } from "../services/ipLocationService";
 import { toast } from "react-toastify";

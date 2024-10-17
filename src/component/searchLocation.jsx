@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { WeatherContext } from "../contexts/contexts";
-import utils from "./utils/utils";
+import utils from "../utils/utils";
 import { search } from "../services/searchLocationService";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

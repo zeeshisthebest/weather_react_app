@@ -1,4 +1,4 @@
-import weatherIcons from "../component/utils/weatherIcons";
+import weatherIcons from "../utils/weatherIcons";
 
 let codes = {
   C1000: {

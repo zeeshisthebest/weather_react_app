@@ -2,6 +2,7 @@
   "name": "weather",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@amcharts/amcharts5": "^5.10.5",
     "@amcharts/amcharts5-geodata": "^5.1.4",

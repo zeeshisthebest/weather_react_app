@@ -1,3 +1,3 @@
 {
-    "apiUrl": "https://api.weatherapi.com/v1"
+    "apiUrl": "https://weather-react-app-backend.vercel.app"
 }
