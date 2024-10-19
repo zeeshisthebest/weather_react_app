@@ -1,6 +1,7 @@
 # Weather App
 
 This is a **React-based Weather App** that provides real-time weather data for any location worldwide. It delivers accurate weather information such as temperature, humidity, wind speed, air quality, weekly forecast, and more.
+- [Live View](https://zeeshisthebest.github.io/weather_react_app/)
 
 ![App Screenshot](./screenshots/overcast.png)
 
@@ -45,8 +46,8 @@ This is a **React-based Weather App** that provides real-time weather data for a
 | ![Overcast](./screenshots/snow.png) | ![Search](./screenshots/search.png) |
 
 ## API Information
-
-This app uses [WeatherAPI](https://weatherapi.com/) to retrieve real-time weather data.
+This app uses [WeatherAPI](https://weatherapi.com/) to retrieve real-time weather data.<br>
+![WeatherApi Logo](https://cdn.weatherapi.com/v4/images/weatherapi_logo.png)
 
 ## License
 
@@ -70,7 +71,7 @@ This project requires an API for fetching weather data. **Please do not call the
    - Create a `.env` file in the root directory of the project (or as specified by the project setup).
    - In this `.env` file, store your API key like so:
      ```bash
-     REACT_APP_API_KEY=your_api_key_here
+     REACT_APP_API_KEY=<your_api_key_here>
      REACT_APP_BASE_URL=https://domain.com
      ```
    - **Do not commit** the `.env` file to version control to avoid exposing your API key.
@@ -92,7 +93,7 @@ Here's an example of what your `.env` file should look like:
 
 ```
 REACT_APP_API_KEY=your_personal_api_key
-REACT_APP_BASE_URL=https://domain.com
+REACT_APP_BASE_URL=https://www.domain.com
 ```
 
 Ensure that you include `.env` in your `.gitignore` file so that this sensitive information is never shared or exposed in the repository:
