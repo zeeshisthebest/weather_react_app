@@ -11,9 +11,9 @@ const apiEndPoint = configs.apiUrl + "/search";
  * @returns A promise that will resolve into api response
  * @throws error thrown by axios
  */
-function search(qry) {
+function search (qry) {
   if (!qry || qry.trim().length <= 3) return;
-  return httpService.get(apiEndPoint, {params: {q: qry,}});
+  return httpService.get(apiEndPoint, { params: { q: encodeURIComponent(qry) } });
 }
 
 export { search };

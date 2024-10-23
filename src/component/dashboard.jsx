@@ -19,7 +19,7 @@ class DashboardView extends Component {
         data: {},
         minMax: {},
         updatedAt: null,
-        loading : true
+        loading: true
     };
 
     /**
@@ -30,7 +30,7 @@ class DashboardView extends Component {
     /**
      * timer ID for regular interval udpate
      */
-    refreshTimer = null;
+    refreshInterval = null;
 
     /**
      * Sets the location into the state either from local storage / IP
@@ -119,15 +119,15 @@ class DashboardView extends Component {
 
 
     // Start the all data fetching process and retries if failed once
-    initRequest = async ()=>{
+    initRequest = async () => {
         let retries = 0;
 
-        while(!Object.keys(this.state.data).length &&  retries <3){
-            this.setState({loading: true})
+        while (!Object.keys(this.state.data).length && retries < 3) {
+            this.setState({ loading: true })
             console.log('Getting Data');
             await this.getWeather();
-            this.setState({loading: false})
-            this.state.data?.weather || await new Promise(resolve=>setTimeout(resolve, 10000));
+            this.setState({ loading: false })
+            this.state.data?.weather || await new Promise(resolve => setTimeout(resolve, 10000));
             ++retries;
         }
     }
@@ -137,14 +137,14 @@ class DashboardView extends Component {
     }
 
     componentWillUnmount () {
-        clearTimeout(this.refreshTimer);
+        clearTimeout(this.refreshInterval);
     }
 
     // Refreshes the app after a time (defualt to 15)
     refreshApp = () => {
         const refreshPeriod = 1000 * 60 * 15; //15 minutes
-        if (this.refreshTimer) clearTimeout(this.refreshTimer);
-        this.refreshTimer = setTimeout(() => {
+        if (this.refreshInterval) clearInterval(this.refreshInterval);
+        this.refreshInterval = setInterval(() => {
             this.getWeather();
         }, refreshPeriod);
     }
