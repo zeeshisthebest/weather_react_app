@@ -4,29 +4,29 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@amcharts/amcharts5": "^5.10.5",
-    "@amcharts/amcharts5-geodata": "^5.1.4",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mui/material": "^6.1.1",
-    "@mui/x-charts": "^7.18.0",
-    "@react-map/world": "^1.0.9",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.7.7",
+    "@amcharts/amcharts5": "^5.19.1",
+    "@amcharts/amcharts5-geodata": "^5.1.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fortawesome/fontawesome-svg-core": "^7.3.0",
+    "@fortawesome/free-solid-svg-icons": "^7.3.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
+    "@mui/material": "^9.1.2",
+    "@mui/x-charts": "^9.7.0",
+    "@react-map/world": "^1.0.13",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "axios": "^1.18.1",
     "prop-types": "^15.8.1",
     "querystring": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-gauge-chart": "^0.5.1",
     "react-scripts": "^5.0.1",
-    "react-toastify": "^10.0.5",
+    "react-toastify": "^11.1.0",
     "source-map-explorer": "^2.5.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^5.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -56,8 +56,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0",
-    "jsdoc": "^4.0.3",
-    "tailwindcss": "^3.4.13"
+    "gh-pages": "^6.3.0",
+    "jsdoc": "^4.0.5",
+    "tailwindcss": "^3.4.19"
   }
 }

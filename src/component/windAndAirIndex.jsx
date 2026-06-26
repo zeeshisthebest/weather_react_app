@@ -1,6 +1,6 @@
 import React from "react";
-import AirQuality from "./airQuality";
-import WindSpeed from "./windSpeed";
+import AirQuality from "./widgets/AirQuality";
+import WindSpeed from "./widgets/WindSpeed";
 import PropTypes from "prop-types";
 
 /**

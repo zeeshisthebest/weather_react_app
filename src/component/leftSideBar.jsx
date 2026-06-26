@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Globe from "./Globe";
-import SunriseSunset from "./sunserSunrise";
-import UvIndex from "./uvIndex";
+import Globe from "./widgets/Globe";
+import SunriseSunset from "./widgets/SunriseSunset";
+import UvIndex from "./widgets/UvIndex";
 import WindAndAirIndex from "./windAndAirIndex";
 import { WeatherContext } from "../contexts/contexts";
 import { getAQI } from "../utils/airQualityData";

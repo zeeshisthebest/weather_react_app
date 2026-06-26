@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import InfoCard from "./infoCard";
+import InfoCard from "./widgets/InfoCard";
 import PropTypes from "prop-types";
-import SearchLocation from "./searchLocation";
+import SearchLocation from "./widgets/SearchLocation";
 import {
 	faDroplet,
 	faLocationDot,

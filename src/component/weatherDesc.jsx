@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGreaterThan } from "@fortawesome/free-solid-svg-icons";
-import OtherLocationCard from "./otherLocationCard";
+import OtherLocationCard from "./widgets/OtherLocationCard";
 import localStorageService from "../services/localStorageService";
 import { WeatherContext } from "../contexts/contexts";
 

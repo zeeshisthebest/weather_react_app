@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { WeatherContext } from "../contexts/contexts";
-import WeeklyWeatherGraph from "./weeklyWeatherGraph";
+import WeeklyWeatherGraph from "./widgets/WeeklyWeatherGraph";
 import { toast } from "react-toastify";
 import {
     getWeekDays,

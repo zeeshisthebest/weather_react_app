@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import UnitSelector from "./unitSelector";
+import UnitSelector from "./widgets/UnitSelector";
 import PropTypes from "prop-types";
-import HiLow from "./hiLow";
+import HiLow from "./widgets/HiLow";
 import { UseMetricsContext, WeatherContext } from "../contexts/contexts";
 
 /**
